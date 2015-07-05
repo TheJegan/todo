@@ -3,10 +3,10 @@ var app = app || {};
 
 (function()
 {
-	var listCollection = Backbone.Collection.extend({
-		model: app.List,
+	var list = Backbone.Collection.extend({
+		model: app.ListModel,
 		url: '/list'
 	});
 
-	app.ListCollection = new listCollection();
+	app.List = new list();
 })();

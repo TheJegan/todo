@@ -7,13 +7,14 @@
 </head>
 <body>
 
-  <script id="entry-template" type="text/x-handlebars-template">
-    <div class="entry">
-      <h1>{{title}}</h1>
-      <div class="body">
-        {{body}}
+  <script id="list-template" type="text/x-handlebars-template">
+    {{#each List}}
+      
+      <div>
+        test:{{name}}
       </div>
     </div>
+    {{/each}}
   </script>
   
   <script src="js/lib/handlebars.js"></script>
@@ -21,7 +22,11 @@
   <script src="js/lib/underscore-1-8-3.js"></script>
   <script src="js/lib/backbone-1-2-1.js"></script>
 
-  
+
+  <script src="js/model/list.js"></script>
+  <script src="js/collection/list.js"></script>
+  <script src="js/view/list.js"></script>
+  <script src="js/main.js"></script>
   <!-- // <script src="demo.js"></script> -->
 </body>
 </html>

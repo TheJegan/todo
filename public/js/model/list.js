@@ -2,15 +2,18 @@ var app = app || {};
 
 (function()
 {
-	app.List = Backbone.Model.extend({
+	app.ListModel = Backbone.Model.extend({
 		defaults: {
 			'_id': '',
-			'name': ''
+			'name': '',
+			'tasks': [],
+			'createdOn': '',
+			'isDefaultDisplay': ''
 		},
 
 		initialize: function()
 		{
-			
+
 		}
 	});
 
