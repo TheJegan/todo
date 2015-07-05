@@ -8,10 +8,11 @@
 <body>
 
   <script id="list-template" type="text/x-handlebars-template">
-    {{#each List}}
-      
+
+    {{name}}
+    {{#each tasks}}    
       <div>
-        test:{{name}}
+        {{name}}
       </div>
     </div>
     {{/each}}
@@ -22,7 +23,7 @@
   <script src="js/lib/underscore-1-8-3.js"></script>
   <script src="js/lib/backbone-1-2-1.js"></script>
 
-
+  <script src="js/route/route.js"></script>
   <script src="js/model/list.js"></script>
   <script src="js/collection/list.js"></script>
   <script src="js/view/list.js"></script>

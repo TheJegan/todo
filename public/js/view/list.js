@@ -21,7 +21,9 @@ var app = app || {};
 		},
 		render: function()
 		{
-			$(this.el).html( this.template({List: app.List.toJSON()}) );
+			//test
+			var list = app.List.toJSON()[0]; //hard 
+			$(this.el).html( this.template({ name: list.name, tasks: list.tasks }));
 		}
 	});
 })(jQuery);

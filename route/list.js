@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var env = require('../env/config');
 var listSchema = require('../model/list');
 var mongoose	= require('mongoose');
 var List = mongoose.model('List', listSchema);
-
-mongoose.connect('mongodb://localhost/todo');
+// mongoose.connect(env.mongooseURL);
 
 
 router.get('/', function(req, res, next)
