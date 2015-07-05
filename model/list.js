@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var listSchema = new Schema({
+var listSchema = new mongoose.Schema({
 	name: String,
 	tasks: [{
 		name: String
