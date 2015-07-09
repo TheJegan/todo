@@ -1,5 +1,5 @@
 var app = app || {};
 
 (function(){
-	new app.ListView();
+	// new app.ListView({model: app.List});
 })();

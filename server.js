@@ -10,7 +10,8 @@ mongoose.connect(config.mongooseURL);
 
 
 app.use(express.static(__dirname + '/public'));
-app.use(session({ secret: 'TODO MAKE UP SOMETHING' }));
+// app.use(express.cookieParser());
+app.use(session({ secret: 'TODO MAKE UP SOMETHING', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
