@@ -24,9 +24,11 @@ var app = app || {};
 			var self = this;
 			var List = app.List.toJSON();
 
-			$(this.el).html(this.template({
+			this.$el.html(this.template({
 				list: List
 			}));
+
+			// this.BuildMenu(List);
 		}
 	});
 })(jQuery);

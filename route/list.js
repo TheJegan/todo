@@ -65,18 +65,18 @@ router.post('/', function(req, res, next)
 		isDefaultDisplay: req.body.isDefaultDisplay
 	});
 
-
-	list.save(function(err)
-		{
-			if(err)
-			{
-				res.send(err);
-			}
-			else
-			{
-				res.send("saved");
-			}
-		});
+	res.send('complete');
+	// list.save(function(err)
+	// 	{
+	// 		if(err)
+	// 		{
+	// 			res.send(err);
+	// 		}
+	// 		else
+	// 		{
+	// 			res.send("saved");
+	// 		}
+	// 	});
 })
 
 

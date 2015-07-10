@@ -3,6 +3,7 @@ var app = express();
 var mongoose = require('mongoose');
 var list = require('./route/list');
 var auth = require('./route/auth');
+// var menu = require('./route/menu')
 var config = require('./env/config');
 var session = require('express-session');
 var passport = require('passport');
@@ -18,6 +19,7 @@ app.use(passport.session());
 app.set('port', process.env.PORT || 3000);
 app.use('/list', list);
 app.use('/auth', auth);
+// app.use('/menu', menu);
 
 app.listen(app.get('port'), function()
 {

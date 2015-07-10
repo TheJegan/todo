@@ -10,6 +10,7 @@ var app = app || {};
 			'createdOn': '',
 			'isDefaultDisplay': ''
 		},
+		idAttribute: '_id',
 
 		initialize: function()
 		{

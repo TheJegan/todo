@@ -39,7 +39,9 @@
     <footer class="footer">
       <div id='footer-menu' class="container">      
         {{#each list}}
-          <a href="#/list/{{_id}}">{{name}}</a>
+          <p class="text-muted">
+            <a href="#/list/{{_id}}" class='menuItem'>{{name}}</a>
+          </p>
         {{/each}}
       </div>
     </footer>
@@ -49,8 +51,8 @@
 
 
     <script id="list-template" type="text/x-handlebars-template">
-           {{name}}
-
+           {{name}} <br />  
+           <input type="text" hint="test add" id="addTask"/>
            {{#each tasks}}    
             <div class="radio">
               <label>
