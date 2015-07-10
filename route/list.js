@@ -13,7 +13,7 @@ function isAuthenticated(req, res, next) {
 
   //console.log(req.user.username);
 
-  res.redirect('/failure')
+  res.redirect('/login.html')
 }
 
 
@@ -51,6 +51,12 @@ router.get('/:id', isAuthenticated, function(req, res, next)
 			res.send(l);
 		}
 	})
+});
+
+router.put('/:id', function(req, res, next)
+{	
+	console.log(req.body);
+	res.send('test');
 });
 
 

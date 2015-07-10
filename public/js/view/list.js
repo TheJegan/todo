@@ -39,11 +39,12 @@ var app = app || {};
 
 					// app.List.add(new )
 					var ListId = self.model.toJSON()[0]._id;
-					var List = app.List.GetList(ListId);
+					var List = app.List.get(ListId);
+					List.set({name: taskName});
+					List.save();
 
-					console.log( List);
-
-					//List.tasks.add(taskName);
+					// List.tasks.add(taskName);
+					// List.collection.add()
 
 					console.log( List);
 				}

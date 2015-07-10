@@ -7,10 +7,15 @@ var auth = require('./route/auth');
 var config = require('./env/config');
 var session = require('express-session');
 var passport = require('passport');
+var bodyParser = require('body-parser');
 mongoose.connect(config.mongooseURL);
 
 
 app.use(express.static(__dirname + '/public'));
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
 // app.use(express.cookieParser());
 app.use(session({ secret: 'TODO MAKE UP SOMETHING', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
