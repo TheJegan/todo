@@ -3,7 +3,7 @@ var app = app || {};
 (function($)
 {
 	app.ListView = Backbone.View.extend({
-		el: 'todo-view',
+		el: '#todo-view',
 		template: Handlebars.compile( $('#list-template').html()   ),
 		initialize: function()
 		{
@@ -18,7 +18,7 @@ var app = app || {};
 			var list = this.model.toJSON()[0];
 
 			//todo figure out why this.el isnt working
-			$('#todo-view').html( this.template({ name: list.name, tasks: list.tasks }));
+			this.$el.html( this.template({ name: list.name, tasks: list.tasks }));
 		},
 		ShowMenu: function()
 		{

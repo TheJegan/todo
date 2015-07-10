@@ -4,7 +4,7 @@ var app = app || {};
 {
 	app.MainView = Backbone.View.extend(
 	{
-		el: 'body',
+		el: "#app",
 		template: Handlebars.compile( $('#main-template').html() ),
 		initialize: function()
 		{
