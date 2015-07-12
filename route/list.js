@@ -1,23 +1,15 @@
 var express = require('express');
 var router = express.Router();
 var env = require('../env/config');
-var listSchema = require('../model/list');
 var mongoose	= require('mongoose');
+var listSchema = require('../model/list');
+var taskSchema = require('../model/task');
 var List = mongoose.model('List', listSchema);
+var Task = mongoose.model('Task', taskSchema);
 // mongoose.connect(env.mongooseURL);
 
 
-function isAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  console.log('is not isAuthenticated');
-
-  //console.log(req.user.username);
-
-  res.redirect('/login.html')
-}
-
-
-router.get('/', isAuthenticated, function(req, res, next)
+router.get('/', env.isAuthenticated, function(req, res, next)
 {
 
 	console.log('user log');
@@ -35,7 +27,7 @@ router.get('/', isAuthenticated, function(req, res, next)
 	})
 });
 
-router.get('/:id', isAuthenticated, function(req, res, next)
+router.get('/:id', env.isAuthenticated, function(req, res, next)
 {
 
 	console.log('user log');
@@ -53,36 +45,62 @@ router.get('/:id', isAuthenticated, function(req, res, next)
 	})
 });
 
+router.get('/:id/task/:taskId', env.isAuthenticated, function(req, res, next)
+{
+
+});
+
 router.put('/:id', function(req, res, next)
 {	
-	console.log(req.body);
-	res.send('test');
+	console.log("\n\n\n\n\n\params: " + req.params.id);
+
+
+	List.find({'_id': req.params.id}, function(err, l)
+	{
+
+		if(l)
+		{
+			l = l[0];
+			l.tasks = req.body.tasks;
+
+			l.save(function(err) {
+		      if (err)
+		        console.log('error')
+		      else
+		        console.log('success')
+		    });
+		}
+	});
+	// res.send('test');
+});
+
+router.put('/:id/task/:taskId', env.isAuthenticated, function(req, res, next)
+{
+
 });
 
 
-router.post('/', function(req, res, next)
+router.post('/', env.isAuthenticated, function(req, res, next)
 {
 	console.log(req.body);
 
 	var list = new List({
 		name: req.body.name,
-		tasks: req.body.tasks,
-		createdOn: req.body.createdOn,
-		isDefaultDisplay: req.body.isDefaultDisplay
+		_user: req.user._id
 	});
 
-	res.send('complete');
-	// list.save(function(err)
-	// 	{
-	// 		if(err)
-	// 		{
-	// 			res.send(err);
-	// 		}
-	// 		else
-	// 		{
-	// 			res.send("saved");
-	// 		}
-	// 	});
+	// res.send('complete');
+	list.save(function(err)
+	{
+		if(err)
+		{
+			res.send(err);
+		}
+		else
+		{
+			res.send("saved");
+		}
+	});
 })
 
 

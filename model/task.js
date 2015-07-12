@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
 
-var listSchema = new mongoose.Schema({
+var taskSchema = new mongoose.Schema({
 	name: String,
+	_list: {ref: 'List', type: mongoose.Schema.Types.ObjectId},
 	_user: {ref: 'User', type: mongoose.Schema.Types.ObjectId},
 	createdOn: {type: Date, default: Date.now}
 });
 
-module.exports = listSchema;
+module.exports = taskSchema;

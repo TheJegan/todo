@@ -40,7 +40,10 @@ var app = app || {};
 					// app.List.add(new )
 					var ListId = self.model.toJSON()[0]._id;
 					var List = app.List.get(ListId);
-					List.set({name: taskName});
+
+					var tasks = List.get('tasks');
+					tasks.push({name: taskName});
+					List.set({tasks: tasks});
 					List.save();
 
 					// List.tasks.add(taskName);
