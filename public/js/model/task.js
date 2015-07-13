@@ -4,7 +4,9 @@ var app = app || {};
 {
 	app.Task = Backbone.Model.extend({
 		defaults: {
-			'name': ''
+			'name': '',
+			'_user': '',
+			'_list': ''
 		},
 
 		initialize: function()

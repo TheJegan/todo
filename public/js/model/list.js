@@ -4,13 +4,13 @@ var app = app || {};
 {
 	app.ListModel = Backbone.Model.extend({
 		defaults: {
-			'_id': '',
+			'_id': null,
 			'name': '',
-			'tasks': [],
-			'createdOn': '',
-			'isDefaultDisplay': ''
+			'_user': '',
+			'createdOn': ''
 		},
 		idAttribute: '_id',
+		urlRoot: '/list',
 
 		initialize: function()
 		{
