@@ -6,7 +6,8 @@ var app = app || {};
 	var AppRouter = Backbone.Router.extend({
 	    routes: {
 	        "list/:id": "renderList",
-	        "list/add/": "addList"
+	        "list/add/": "addList",
+	        "list/:id/addTask/": "addTask"
 	    }
 	});
 
@@ -15,15 +16,17 @@ var app = app || {};
 
 	app_router.on('route:renderList', function(id) 
 	{	
-		var filter = app.List.GetList(id);
-		new app.ListView({model: filter});
+		new app.readTask({listId: id});
 	});
 
 	app_router.on('route:addList', function()
 	{
-		// console.log('addList');
 		new app.addList();
 	});
 
+	app_router.on('route:addTask', function(id)
+	{
+		new app.Task({listId: id});
+	})
 	Backbone.history.start();
 })();

@@ -4,9 +4,18 @@ var mongoose = require('mongoose');
 var taskSchema = require('../model/task');
 var Task = mongoose.model('Task', taskSchema);
 
-router.get('/', function(req, res, next)
+router.get('/:listId', function(req, res, next)
 {
-
+	Task.find({'_list': req.params.listId}, function(err, l)
+	{
+		if(l)
+		{
+			res.send(l);
+		}else
+		{
+			res.send('err');
+		}
+	})
 });
 
 
@@ -32,4 +41,8 @@ router.post('/:listId', function(req, res, next)
 			//res with stat
 		}
 	});	
-})
+});
+
+
+
+module.exports = router;

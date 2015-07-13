@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 var list = require('./route/list');
+var task = require('./route/task');
 var auth = require('./route/auth');
 var system = require('./route/system');
 // var menu = require('./route/menu')
@@ -24,6 +25,7 @@ app.use(passport.session());
 
 app.set('port', process.env.PORT || 3000);
 app.use('/list', list);
+app.use('/task', task);
 app.use('/auth', auth);
 app.use('/system', system);
 

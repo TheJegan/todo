@@ -83,6 +83,7 @@ router.put('/:id/task/:taskId', env.isAuthenticated, function(req, res, next)
 router.post('/', env.isAuthenticated, function(req, res, next)
 {
 	console.log(req.body);
+	console.log("user " + req.user);
 
 	var list = new List({
 		name: req.body.name,
