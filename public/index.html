@@ -10,8 +10,6 @@
     
 
     <script id="main-template" type="text/x-handlebars-template">
-      <a href="#/list/add/" style="font-size: 20px"> +List </a>
-
       <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -28,7 +26,7 @@
                     {{#each list}}
                       <li><a href="#/list/{{_id}}">{{name}}</a></li>
                     {{/each}}
-
+                    <li><a href="#/list/add/" style="font-size: 20px"> +List </a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -100,7 +98,6 @@
     <script src="js/model/task.js"></script>
     <script src="js/collection/list.js"></script>
     <script src="js/collection/task.js"></script>
-    <script src="js/view/list.js"></script>
     <script src="js/view/createList.js"></script>
     <script src="js/view/createTask.js"></script>
     <script src="js/view/readTask.js"></script>

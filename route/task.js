@@ -19,7 +19,6 @@ router.get('/:listId', env.isAuthenticated, function(req, res, next)
 	})
 });
 
-
 router.post('/:listId', env.isAuthenticated, function(req, res, next)
 {
 	var listId = req.params.listId;
@@ -43,7 +42,6 @@ router.post('/:listId', env.isAuthenticated, function(req, res, next)
 		}
 	});	
 });
-
 
 
 module.exports = router;

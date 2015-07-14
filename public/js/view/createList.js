@@ -18,15 +18,12 @@ var app = app || {};
 		{
 			$(this.el).html(this.template());
 		},
-		AddList: function()
+		AddList: function(e)
 		{
-			// console.log("add list");
+			e.preventDefault();
+			e.stopPropagation();
 			var listName = $("#ListName").val();
 			var list = new app.ListModel({name: listName});
-
-			// console.log(list);
-			// app.List.add(list);
-
 			list.save();
 
 		}

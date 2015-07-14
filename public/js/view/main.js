@@ -8,27 +8,22 @@ var app = app || {};
 		template: Handlebars.compile( $('#main-template').html() ),
 		initialize: function()
 		{
-			var self = this;
-			app.List.fetch({
-				success: function(a,b,c)
-				{
-					self.render();
-				}
-			});
-			//this.listenTo(app.List, 'change', this.test)
-			// this.render();
+			this.timer = setInterval(function() {
+			      app.List.fetch()
+			 }, 2000);
+
+			this.listenTo(app.List, 'add', this.render);
 		},
 		render: function()
 		{
-
-			var self = this;
 			var List = app.List.toJSON();
 
 			this.$el.html(this.template({
 				list: List
 			}));
-
-			// this.BuildMenu(List);
+		},
+		close: function() {
+		   clearInterval(this.timer);
 		}
 	});
 })(jQuery);

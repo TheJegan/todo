@@ -8,7 +8,6 @@ var app = app || {};
 		listId: 0,
 		initialize: function(options )
 		{
-			var self = this;
 			this.options = options;
 			app.Tasks.url = '/task/' + options.listId;
 
@@ -22,33 +21,14 @@ var app = app || {};
 		},
 		render: function()
 		{
-
 			var list = {id: this.options.listId, tasks: app.Tasks.toJSON()};
-
 			$("#todo-view").html(
 				this.template(list)
 			);
-
 			return this;
-		},
-		renderRow: function()
-		{
-			// $(this.el).html('');
-			var self= this;
-			_.each(app.Tasks.models, function(data) {
-	           $("#todo-view").append( this.template({name: data.attributes.name})  );
-
-	        }, this);
-			console.log('render');
-	        return this;
-		},
-		reRenderRow: function()
-		{
-
 		},
 		close: function() {
 		   clearInterval(this.timer);
 		}
-
 	});
 })(jQuery);

@@ -6,8 +6,6 @@ var listSchema = require('../model/list');
 var taskSchema = require('../model/task');
 var List = mongoose.model('List', listSchema);
 var Task = mongoose.model('Task', taskSchema);
-// mongoose.connect(env.mongooseURL);
-
 
 router.get('/', env.isAuthenticated, function(req, res, next)
 {
@@ -22,7 +20,6 @@ router.get('/', env.isAuthenticated, function(req, res, next)
 		}
 	})
 });
-
 
 router.post('/', env.isAuthenticated, function(req, res, next)
 {
@@ -46,7 +43,6 @@ router.post('/', env.isAuthenticated, function(req, res, next)
 			res.send("saved");
 		}
 	});
-})
-
+});
 
 module.exports = router;
