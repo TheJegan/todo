@@ -56,7 +56,6 @@
     <script id="list-template" type="text/x-handlebars-template">
           <a href="#/list/{{id}}/addTask/" style="font-size: 20px"> +Task </a>
            {{name}} <br />  
-           <input type="text" hint="test add" id="addTask"/>
            {{#each tasks}}    
             <div class="radio">
               <label>
@@ -66,6 +65,15 @@
             </div>
           </div>
           {{/each}}
+    </script>
+
+    <script id="view-template" type="text/x-handlebars-template">
+          <div class="radio">
+              <label>
+                <input type="radio">
+                {{name}}
+              </label>
+            </div>
     </script>
 
     <script id="add-list-template" type="text/x-handlebars-template">

@@ -17,13 +17,17 @@ var app = app || {};
 		{
 			$(this.el).html( this.template() );
 		},
-		AddTask: function()
+		AddTask: function(e)
 		{
+			e.stopPropagation();
+			e.preventDefault();
 			var taskName = $('#ListName').val();
 
 			var list = new app.TaskModel({name: taskName});
 			list.urlRoot += '/' + this.options.listId;
 			list.save();
+
+			new app.readTask({listId: this.options.listId});
 		}
 	});
 })(jQuery);
