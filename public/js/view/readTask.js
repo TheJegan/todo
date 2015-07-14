@@ -12,16 +12,6 @@ var app = app || {};
 			this.options = options;
 			app.Tasks.url = '/task/' + options.listId;
 
-			// app.Tasks.fetch(
-			// {
-			// 	success: function(a,b,c)
-			// 	{
-			// 		self.render();
-			// 	}
-			// });
-			// $(this.el).html('');			
-			// window.setInterval(app.Tasks.fetch, 2000);
-			// $(this.el).append(' <a href="#/list/'÷ +options.listId+'/addTask/" style="font-size: 20px"> +Task </a>');
 			 this.timer = setInterval(function() {
 			      app.Tasks.fetch()
 			 }, 2000);
@@ -46,8 +36,6 @@ var app = app || {};
 			// $(this.el).html('');
 			var self= this;
 			_.each(app.Tasks.models, function(data) {
-
-	           // $(self.el).append( this.template({name: data.attributes.name})  );
 	           $("#todo-view").append( this.template({name: data.attributes.name})  );
 
 	        }, this);

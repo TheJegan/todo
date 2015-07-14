@@ -11,11 +11,7 @@ var Task = mongoose.model('Task', taskSchema);
 
 router.get('/', env.isAuthenticated, function(req, res, next)
 {
-
-	console.log('user log');
-	console.log(req.user);
-
-	List.find({/* UserID: req.user._id */}, function(err, l)
+	List.find({'_user': req.user._id}, function(err, l)
 	{
 		if(err)
 		{
@@ -25,58 +21,6 @@ router.get('/', env.isAuthenticated, function(req, res, next)
 			res.send(l);
 		}
 	})
-});
-
-router.get('/:id', env.isAuthenticated, function(req, res, next)
-{
-
-	console.log('user log');
-	console.log(req.user);
-
-	List.find({"_id": req.params.id}, function(err, l)
-	{
-		if(err)
-		{
-			res.send(err);
-		}else
-		{
-			res.send(l);
-		}
-	})
-});
-
-router.get('/:id/task/:taskId', env.isAuthenticated, function(req, res, next)
-{
-
-});
-
-router.put('/:id', function(req, res, next)
-{	
-	console.log("\n\n\n\n\n\params: " + req.params.id);
-
-
-	List.find({'_id': req.params.id}, function(err, l)
-	{
-
-		if(l)
-		{
-			l = l[0];
-			l.tasks = req.body.tasks;
-
-			l.save(function(err) {
-		      if (err)
-		        console.log('error')
-		      else
-		        console.log('success')
-		    });
-		}
-	});
-	// res.send('test');
-});
-
-router.put('/:id/task/:taskId', env.isAuthenticated, function(req, res, next)
-{
-
 });
 
 

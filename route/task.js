@@ -3,10 +3,11 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var taskSchema = require('../model/task');
 var Task = mongoose.model('Task', taskSchema);
+var env = require('../env/config');
 
-router.get('/:listId', function(req, res, next)
+router.get('/:listId', env.isAuthenticated, function(req, res, next)
 {
-	Task.find({'_list': req.params.listId}, function(err, l)
+	Task.find({'_list': req.params.listId, '_user': req.user._id}, function(err, l)
 	{
 		if(l)
 		{
@@ -19,7 +20,7 @@ router.get('/:listId', function(req, res, next)
 });
 
 
-router.post('/:listId', function(req, res, next)
+router.post('/:listId', env.isAuthenticated, function(req, res, next)
 {
 	var listId = req.params.listId;
 
