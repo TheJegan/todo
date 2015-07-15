@@ -27,7 +27,7 @@ var app = app || {};
 			list.urlRoot += '/' + this.options.listId;
 			list.save();
 
-			new app.readTask({listId: this.options.listId});
+			app.router.navigate("/list/" + this.options.listId, true)
 		}
 	});
 })(jQuery);

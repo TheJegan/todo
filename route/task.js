@@ -43,5 +43,34 @@ router.post('/:listId', env.isAuthenticated, function(req, res, next)
 	});	
 });
 
+router.put('/:taskId', env.isAuthenticated, function(req, res, next)
+{
+	var listId = req.body._list;
+	var taskId = req.params.taskId;
+
+	Task.find({'_id': taskId}, function(err, t)
+	{
+		if(!err)
+		{
+			t = t[0];
+			console.log(t);
+			t._list = listId;
+
+			t.save(function(err)
+				{
+					if(err)
+					{
+						console.log(err);
+						res.send(err);
+					}else
+					{
+						console.log('saved');
+						res.send('save');
+
+					}
+				});
+		}
+	});
+});
 
 module.exports = router;

@@ -12,19 +12,19 @@ var app = app || {};
 	});
 
 	// Initiate the router
-	var app_router = new AppRouter;
+	app.router = new AppRouter;
 
-	app_router.on('route:renderList', function(id) 
+	app.router.on('route:renderList', function(id) 
 	{	
-		new app.readTask({listId: id});
+		new app.readTask({listId: id, model: app.Tasks});
 	});
 
-	app_router.on('route:addList', function()
+	app.router.on('route:addList', function()
 	{
 		new app.addList();
 	});
 
-	app_router.on('route:addTask', function(id)
+	app.router.on('route:addTask', function(id)
 	{
 		new app.Task({listId: id});
 	})

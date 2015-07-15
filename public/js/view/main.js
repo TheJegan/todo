@@ -8,15 +8,14 @@ var app = app || {};
 		template: Handlebars.compile( $('#main-template').html() ),
 		initialize: function()
 		{
-			this.timer = setInterval(function() {
-			      app.List.fetch()
-			 }, 2000);
-
-			this.listenTo(app.List, 'add', this.render);
+			this.listenTo(this.model, 'reset', this.render);
+			this.model.fetch({reset: true});
+			
+			this.render();
 		},
 		render: function()
 		{
-			var List = app.List.toJSON();
+			var List = this.model.toJSON();
 
 			this.$el.html(this.template({
 				list: List

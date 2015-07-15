@@ -5,27 +5,61 @@ var app = app || {};
 	app.readTask = Backbone.View.extend({
 		el: '#todo-view',
 		template: Handlebars.compile( $('#list-template').html() ),
-		listId: 0,
+		events: {
+			// 'click .menuItem': "moveToList",
+			'click .checkbox': 'showMenu'
+		},
 		initialize: function(options )
 		{
+			var self = this;
 			this.options = options;
-			app.Tasks.url = '/task/' + options.listId;
+			this.model.url =  '/task/' + options.listId;
+			this.listenTo(self.model, 'add', this.render);
+			this.listenTo(self.model, 'reset', this.render);
+			this.listenTo(self.model, 'change', this.render);
+			this.render();
 
-			 this.timer = setInterval(function() {
-			      app.Tasks.fetch()
-			 }, 2000);
-
-			this.listenTo(app.Tasks, 'add', this.render);
-			this.listenTo(app.Tasks, 'change', this.render);
+			this.model.fetch({reset: true});
 			return this;
 		},
 		render: function()
 		{
-			var list = {id: this.options.listId, tasks: app.Tasks.toJSON()};
+			var list = {id: this.options.listId, tasks: this.model.toJSON()};
 			$("#todo-view").html(
 				this.template(list)
 			);
+
+
+			var self =this;
+			$('.menuItem').unbind('click').click(function(e)
+			{
+				// self.moveToList(e);
+				var listId = $(this).attr('data-id');
+				var taskId = $('input:checked').attr('data-id');
+
+				 self.moveToList(listId, taskId);
+			});
 			return this;
+		},
+		moveToList: function(listId, taskId)
+		{
+			
+			var task = this.model.get(taskId);
+			task.set({_list: listId});		
+			task.save();
+
+		},
+		showMenu: function(e)
+		{
+			var HeightOfEachMenuItem = 50;
+
+	    	var menuHeight = $('.menuItem').length * HeightOfEachMenuItem;
+			var $menu = $('footer');
+	
+			$menu.animate({
+		        height: menuHeight
+		    }, 350);
+
 		},
 		close: function() {
 		   clearInterval(this.timer);

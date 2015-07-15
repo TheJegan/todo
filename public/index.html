@@ -41,7 +41,7 @@
       <div id='footer-menu' class="container">      
         {{#each list}}
           <p class="text-muted">
-            <a href="#/list/{{_id}}" class='menuItem'>{{name}}</a>
+            <a data-id="{{_id}}" class='menuItem'>{{name}}</a>
           </p>
         {{/each}}
       </div>
@@ -55,9 +55,9 @@
           <a href="#/list/{{id}}/addTask/" style="font-size: 20px"> +Task </a>
            {{name}} <br />  
            {{#each tasks}}    
-            <div class="radio">
+            <div class="checkbox">
               <label>
-                <input type="radio">
+                <input type="checkbox" data-id="{{_id}}" >
                 {{name}}
               </label>
             </div>
@@ -98,10 +98,10 @@
     <script src="js/model/task.js"></script>
     <script src="js/collection/list.js"></script>
     <script src="js/collection/task.js"></script>
+    <script src="js/view/main.js"></script>
     <script src="js/view/createList.js"></script>
     <script src="js/view/createTask.js"></script>
-    <script src="js/view/readTask.js"></script>
-    <script src="js/view/main.js"></script>
+    <script src="js/view/readTask.js"></script>    
     <script src="js/app.js"></script>
     <script src="js/route/route.js"></script>
  
