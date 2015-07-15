@@ -22,7 +22,7 @@ var app = app || {};
 			}));
 		},
 		close: function() {
-		   clearInterval(this.timer);
+		   // clearInterval(this.timer);
 		}
 	});
 })(jQuery);

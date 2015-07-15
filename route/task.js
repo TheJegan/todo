@@ -65,7 +65,7 @@ router.put('/:taskId', env.isAuthenticated, function(req, res, next)
 					}else
 					{
 						console.log('saved');
-						res.send('save');
+						res.send({'status': 'ok'});
 
 					}
 				});

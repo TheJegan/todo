@@ -43,10 +43,16 @@ var app = app || {};
 		},
 		moveToList: function(listId, taskId)
 		{
-			
+			var self = this;
 			var task = this.model.get(taskId);
 			task.set({_list: listId});		
-			task.save();
+			task.save(null,
+			{
+				success: function() 
+				{
+					self.model.fetch({reset: true});
+		        }
+		    });
 
 		},
 		showMenu: function(e)
