@@ -7,7 +7,8 @@ var app = app || {};
 		template: Handlebars.compile( $('#list-template').html() ),
 		events: {
 			// 'click .menuItem': "moveToList",
-			'click .checkbox': 'showMenu'
+			'click .checkbox': 'showMenu',
+			'click .delete': 'deleteTodo'
 		},
 		initialize: function(options )
 		{
@@ -19,7 +20,14 @@ var app = app || {};
 			this.listenTo(self.model, 'change', this.render);
 			this.render();
 
-			this.model.fetch({reset: true});
+
+			self.model.fetch({reset: true});
+			
+			this.timer = setInterval(function()
+			{
+				self.model.fetch({reset: true});
+			}, 10000);
+			
 			return this;
 		},
 		render: function()
@@ -39,6 +47,15 @@ var app = app || {};
 
 				 self.moveToList(listId, taskId);
 			});
+
+			$('.delete').unbind('click').click(function(e)
+			{
+				e.preventDefault();
+				e.stopPropagation();
+
+				//simplify
+				self.deleteTodo( $(this).closest('.checkbox').find('input').attr('data-id') );
+			});
 			return this;
 		},
 		moveToList: function(listId, taskId)
@@ -54,6 +71,12 @@ var app = app || {};
 		        }
 		    });
 
+		},
+		deleteTodo: function(id)
+		{
+			var task = this.model.get(id);
+
+			task.destroy();
 		},
 		showMenu: function(e)
 		{

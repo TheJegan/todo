@@ -2,7 +2,7 @@ var app = app || {};
 
 (function($){
 	app.Task = Backbone.View.extend({
-		el: '#todo-view',
+		el: '#todo-body',
 		listId: 0, //hack
 		events: {
 			'click #btnAddList': 'AddTask'

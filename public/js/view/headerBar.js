@@ -10,10 +10,11 @@ var app = app || {};
 			var self = this;
 			this.listenTo(this.model, 'reset', this.render);
 
+
 			setInterval(function()
 			{
 				self.model.fetch({reset: true});
-			}, 2000);
+			}, 10 * app.sec);
 			this.render();
 		},
 		render: function()
