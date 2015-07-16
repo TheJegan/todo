@@ -16,7 +16,7 @@ var app = app || {};
 
 	app.router.on('route:renderList', function(id) 
 	{	
-		new app.readTask({listId: id, model: app.Tasks});
+		new app.ReadTask({listId: id, model: app.Tasks});
 	});
 
 	app.router.on('route:addList', function()

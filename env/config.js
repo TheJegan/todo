@@ -13,7 +13,7 @@ var config = {
 		 	return next(); 
 		 }
 		console.log('is not isAuthenticated');
-		res.redirect('/login.html');
+		res.send({'statusCode': '-1'})
 	}
 }
 module.exports = config;

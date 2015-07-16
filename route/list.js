@@ -40,7 +40,7 @@ router.post('/', env.isAuthenticated, function(req, res, next)
 		}
 		else
 		{
-			res.send("saved");
+			res.send({"status" : "saved"});
 		}
 	});
 });

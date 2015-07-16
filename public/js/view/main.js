@@ -16,9 +16,12 @@ var app = app || {};
 		render: function()
 		{
 			var List = this.model.toJSON();
-
+			var isLoggedIn = false;
+			var username = "";
+			
 			this.$el.html(this.template({
-				list: List
+				list: List,
+				user: username
 			}));
 		},
 		close: function() {

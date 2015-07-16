@@ -24,8 +24,13 @@ var app = app || {};
 			e.stopPropagation();
 			var listName = $("#ListName").val();
 			var list = new app.ListModel({name: listName});
-			list.save();
-
+			
+			list.save({
+				success: function()
+				{
+					new app.MainView({model: app.List});
+				}
+			});
 		}
 	})
 })(jQuery);

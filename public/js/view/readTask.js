@@ -2,8 +2,8 @@ var app = app || {};
 
 (function($)
 {
-	app.readTask = Backbone.View.extend({
-		el: '#todo-view',
+	app.ReadTask = Backbone.View.extend({
+		el: '#todo-body',
 		template: Handlebars.compile( $('#list-template').html() ),
 		events: {
 			// 'click .menuItem': "moveToList",
