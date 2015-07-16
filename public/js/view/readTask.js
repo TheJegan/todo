@@ -25,7 +25,7 @@ var app = app || {};
 		render: function()
 		{
 			var list = {id: this.options.listId, tasks: this.model.toJSON()};
-			$("#todo-view").html(
+			$(this.el).html(
 				this.template(list)
 			);
 
