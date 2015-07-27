@@ -5,6 +5,21 @@ var taskSchema = require('../model/task');
 var Task = mongoose.model('Task', taskSchema);
 var env = require('../env/config');
 
+
+router.get('/', env.isAuthenticated, function(req, res, next)
+{
+	Task.find({'_user': req.user._id}, function(err, l)
+	{
+		if(l)
+		{
+			res.send(l);
+		}else
+		{
+			res.send('err');
+		}
+	})
+});
+
 router.get('/:listId', env.isAuthenticated, function(req, res, next)
 {
 	Task.find({'_list': req.params.listId, '_user': req.user._id}, function(err, l)

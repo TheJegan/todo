@@ -14,25 +14,32 @@ var app = app || {};
 		{
 			var self = this;
 			this.options = options;
-			this.model.url =  '/task/' + options.listId;
+
 			this.listenTo(self.model, 'add', this.render);
 			this.listenTo(self.model, 'reset', this.render);
 			this.listenTo(self.model, 'change', this.render);
 			this.render();
 
 
-			self.model.fetch({reset: true});
+			// self.model.fetch({reset: true});
 			
-			this.timer = setInterval(function()
-			{
-				self.model.fetch({reset: true});
-			}, 10000);
+			// this.timer = setInterval(function()
+			// {
+			// 	self.model.fetch({reset: true});
+			// }, 10000);
 			
+
 			return this;
 		},
 		render: function()
 		{
-			var list = {id: this.options.listId, tasks: this.model.toJSON()};
+			var task = this.model.where({_list: this.options.listId});
+			
+
+			var list = {
+							id: this.options.listId, 
+							tasks: _.map( task, function( model ){ return model.toJSON(); } )
+						};
 			$(this.el).html(
 				this.template(list)
 			);
