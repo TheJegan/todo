@@ -21,12 +21,12 @@ var app = app || {};
 
 	app.router.on('route:addList', function()
 	{
-		new app.addList();
+		new app.CreateList();
 	});
 
 	app.router.on('route:addTask', function(id)
 	{
-		new app.Task({listId: id});
+		new app.CreateTask({listId: id});
 	})
 	Backbone.history.start();
 })();

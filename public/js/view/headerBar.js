@@ -5,17 +5,19 @@ var app = app || {};
 	app.HeaderMenu = Backbone.View.extend({
 		el: '#header',
 		template: Handlebars.compile( $('#main-template').html() ),
+		events: {
+			'click #sync': 'sync'
+		},
 		initialize: function()
 		{
 			var self = this;
 			this.listenTo(this.model, 'reset', this.render);
-
-
-			setInterval(function()
-			{
-				self.model.fetch({reset: true});
-			}, 10 * app.sec);
 			this.render();
+		},
+		sync: function()
+		{
+			app.Tasks.fetch({reset: true});
+			app.List.fetch({reset: true});
 		},
 		render: function()
 		{

@@ -3,9 +3,9 @@ var app = app || {};
 
 (function($)
 {
-	app.addList = Backbone.View.extend(
+	app.CreateList = Backbone.View.extend(
 	{
-		el: '#todo-view',
+		el: '#todo-body',
 		events: {
 			'click #btnAddList': 'AddList'
 		},

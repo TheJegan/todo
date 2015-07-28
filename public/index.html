@@ -33,9 +33,11 @@
                         <li><a href="#/list/{{_id}}">{{name}}</a></li>
                       {{/each}}
                       
+                        <li> <a id="sync"> Sync</a></li>
 
+                        <li><a href="#/list/add/" style="font-size: 20px"> +List </a></li>
                         {{#if user}}
-                              <li><a href="#/list/add/" style="font-size: 20px"> +List </a></li>
+                              
                               <li><a href="#"> {{user}} </a></li>
                         {{else}}
                             <li><a href="login.html"> Login </a></li>

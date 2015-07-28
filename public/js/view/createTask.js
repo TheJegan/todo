@@ -1,7 +1,7 @@
 var app = app || {};
 
 (function($){
-	app.Task = Backbone.View.extend({
+	app.CreateTask = Backbone.View.extend({
 		el: '#todo-body',
 		listId: 0, //hack
 		events: {
