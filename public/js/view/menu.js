@@ -8,12 +8,12 @@ var app = app || {};
 		initialize: function()
 		{
 			this.listenTo(this.model, 'reset', this.render);
-			this.model.fetch({reset: true});
+			// this.model.fetch({reset: true});
 			this.render();
 		},
 		render: function()
 		{
-			var list = this.model.toJSON();
+			var list = this.model;
 			$(this.el).html( this.template({list: list}) );
 		}	
 

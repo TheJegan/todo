@@ -7,7 +7,8 @@ var app = app || {};
 	    routes: {
 	        "list/:id": "renderList",
 	        "list/add/": "addList",
-	        "list/:id/addTask/": "addTask"
+	        "list/:id/addTask/": "addTask",
+	        "settings/": 'settings'
 	    }
 	});
 
@@ -16,6 +17,7 @@ var app = app || {};
 
 	app.router.on('route:renderList', function(id) 
 	{	
+		// var TaskVM = app.GetTask(id);
 		new app.ReadTask({listId: id, model: app.Tasks});
 	});
 
@@ -27,6 +29,12 @@ var app = app || {};
 	app.router.on('route:addTask', function(id)
 	{
 		new app.CreateTask({listId: id});
-	})
+	});
+
+	app.router.on('route:settings', function()
+	{
+		// new app.CreateTask({listId: id});
+		new app.Settings();
+	});
 	Backbone.history.start();
 })();

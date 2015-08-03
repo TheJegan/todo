@@ -6,9 +6,7 @@ var app = app || {};
 		el: '#todo-body',
 		template: Handlebars.compile( $('#list-template').html() ),
 		events: {
-			// 'click .menuItem': "moveToList",
-			'click .checkbox': 'showMenu',
-			'click .delete': 'deleteTodo'
+			'click .checkbox': 'showMenu'
 		},
 		initialize: function(options )
 		{

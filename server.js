@@ -5,6 +5,7 @@ var list = require('./route/list');
 var task = require('./route/task');
 var auth = require('./route/auth');
 var system = require('./route/system');
+var user = require('./route/user');
 // var menu = require('./route/menu')
 var config = require('./env/config');
 var session = require('express-session');
@@ -28,6 +29,7 @@ app.use('/list', list);
 app.use('/task', task);
 app.use('/auth', auth);
 app.use('/system', system);
+app.use('/user', user);
 
 app.listen(app.get('port'), function()
 {

@@ -2,22 +2,27 @@ var app = app || {};
 
 (function()
 {
-	app.sec = 1000;
+	app.sec = 0;
 
 	app.List.fetch({reset: true});
 	app.Tasks.fetch({reset: true});
+	app.User.fetch({reset: true});
+	
 	var seconds = 1000;
 	
-	// setInterval(function()
-	// {
-	// 	app.Tasks.fetch({reset: true});
-	// }, 0 * seconds);
 
-	// setInterval(function()
-	// {
-	// 	app.Tasks.fetch({reset: true});
-	// }, 0 * seconds);
+	if(app.sec > 0)
+	{
+		setInterval(function()
+		{
+			app.Tasks.fetch({reset: true});
+		}, app.sec * seconds);
 
+		setInterval(function()
+		{
+			app.Tasks.fetch({reset: true});
+		}, app.sec * seconds);
+	}
 
 	new app.HeaderMenu({model: app.List});
 	new app.ReadTask({model: app.Tasks});

@@ -12,6 +12,7 @@ var app = app || {};
 		{
 			var self = this;
 			this.listenTo(this.model, 'reset', this.render);
+			this.listenTo(app.User, 'reset', this.render);
 			this.render();
 		},
 		sync: function()
@@ -22,7 +23,11 @@ var app = app || {};
 		render: function()
 		{
 			var list = this.model.toJSON();
-			$(this.el).html( this.template({list: list}) );
+			$(this.el).html( this.template({list: list, user: app.User.toJSON()[0]}) );
+		},
+		renderUser: function()
+		{
+			
 		}
 	});
 })(jQuery);

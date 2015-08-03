@@ -27,7 +27,7 @@ var app = app || {};
 			list.urlRoot += '/' + this.options.listId;
 			list.save();
 
-			app.router.navigate("/list/" + this.options.listId, true)
+			app.router.navigate("/list/" + this.options.listId, true);
 		}
 	});
 })(jQuery);
