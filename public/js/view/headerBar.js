@@ -11,7 +11,7 @@ var app = app || {};
 		initialize: function()
 		{
 			var self = this;
-			this.listenTo(this.model, 'reset', this.render);
+			// this.listenTo(this.model, 'reset', this.render);
 			this.listenTo(app.User, 'reset', this.render);
 			this.render();
 		},
@@ -24,10 +24,6 @@ var app = app || {};
 		{
 			var list = this.model.toJSON();
 			$(this.el).html( this.template({list: list, user: app.User.toJSON()[0]}) );
-		},
-		renderUser: function()
-		{
-			
 		}
 	});
 })(jQuery);
