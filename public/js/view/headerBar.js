@@ -11,9 +11,10 @@ var app = app || {};
 		initialize: function()
 		{
 			var self = this;
-			// this.listenTo(this.model, 'reset', this.render);
+			
 			this.listenTo(app.User, 'reset', this.render);
 			this.listenTo(this.model, 'add', this.render);
+			this.listenTo(this.model, 'reset', this.render);
 			this.render();
 		},
 		sync: function()
