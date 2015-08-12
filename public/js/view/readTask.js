@@ -16,17 +16,8 @@ var app = app || {};
 			this.listenTo(self.model, 'add', this.render);
 			this.listenTo(self.model, 'reset', this.render);
 			this.listenTo(self.model, 'change', this.render);
+			this.listenTo(self.model, 'destroy', this.render);
 			this.render();
-
-
-			// self.model.fetch({reset: true});
-			
-			// this.timer = setInterval(function()
-			// {
-			// 	self.model.fetch({reset: true});
-			// }, 10000);
-			
-
 			return this;
 		},
 		render: function()
@@ -59,7 +50,10 @@ var app = app || {};
 				e.stopPropagation();
 
 				//simplify
-				self.deleteTodo( $(this).closest('.checkbox').find('input').attr('data-id') );
+				self.deleteTodo( 
+					$(this).closest('.checkbox').find('input').attr('data-id'),
+					$(this).next('.taskName').text().trim()		
+					);
 			});
 			return this;
 		},
@@ -77,10 +71,29 @@ var app = app || {};
 		    });
 
 		},
-		deleteTodo: function(id)
+		deleteTodo: function(id, taskName)
+		{
+			var self = this;
+
+			$('#myModal')
+			.find('.modal-body')
+			.html('<p> Are you sure you want to delete <strong>' + taskName + '</strong>?</p>');
+
+			$('#myModal').modal({
+			  keyboard: false
+			});
+
+
+			$('#yes').unbind('click').click(function(e)
+			{
+				$('#myModal').modal('hide')
+				self.DeleteTask(id);
+				// console.log(id);
+			});
+		},
+		DeleteTask: function(id)
 		{
 			var task = this.model.get(id);
-
 			task.destroy();
 		},
 		showMenu: function(e)

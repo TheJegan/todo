@@ -13,6 +13,7 @@ var app = app || {};
 			var self = this;
 			// this.listenTo(this.model, 'reset', this.render);
 			this.listenTo(app.User, 'reset', this.render);
+			this.listenTo(this.model, 'add', this.render);
 			this.render();
 		},
 		sync: function()
