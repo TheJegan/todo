@@ -45,4 +45,17 @@ router.post('/', env.isAuthenticated, function(req, res, next)
 	});
 });
 
+
+router.delete('/:id', env.isAuthenticated, function(req, res, next)
+{
+	var listId = req.params.id;
+
+	List.find({'_id': id}, function(err, t)
+	{
+		if(!err)
+		{
+			res.send({'status': 'ok'});
+		}
+	}).remove().exec();
+})
 module.exports = router;

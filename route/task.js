@@ -90,13 +90,13 @@ router.put('/:taskId', env.isAuthenticated, function(req, res, next)
 
 router.delete('/:taskId', env.isAuthenticated, function(req, res, next)
 {
-	Task.remove({'_id': req.params.taskId}, function(err, t)
+	Task.find({'_id': req.params.taskId}, function(err, t)
 	{
 		if(!err)
 		{
 			res.send({'status': 'ok'});
 		}
-	})
+	}).remove().exec();
 
 })
 
