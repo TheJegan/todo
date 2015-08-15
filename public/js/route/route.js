@@ -40,7 +40,7 @@ var app = app || {};
 
 	app.router.on('route:update', function(id)
 	{
-		new app.UpdateTask({taskId: id, model: app.Tasks});
+		new app.UpdateTask({modelId: id, model: app.Tasks});
 	});
 
 	Backbone.history.start();

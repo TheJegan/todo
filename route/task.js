@@ -68,7 +68,7 @@ router.put('/:taskId', env.isAuthenticated, function(req, res, next)
 		if(!err)
 		{
 			t = t[0];
-			console.log(t);
+			t.name = req.body.name;
 			t._list = listId;
 
 			t.save(function(err)
@@ -79,7 +79,7 @@ router.put('/:taskId', env.isAuthenticated, function(req, res, next)
 						res.send(err);
 					}else
 					{
-						console.log('saved');
+						console.log('updated');
 						res.send({'status': 'ok'});
 
 					}

@@ -45,6 +45,19 @@ router.post('/', env.isAuthenticated, function(req, res, next)
 	});
 });
 
+router.put('/:listId', env.isAuthenticated, function(req, res, next)
+{
+	List.find({'_id': id}, function(err, t)
+	{
+		if(!err)
+		{
+			t = t[0];
+			t.name = req.body.name;
+
+			res.send({'status': 'ok'});
+		}
+	});
+});
 
 router.delete('/:id', env.isAuthenticated, function(req, res, next)
 {
