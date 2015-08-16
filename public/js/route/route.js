@@ -9,7 +9,8 @@ var app = app || {};
 	        "list/add/": "addList",
 	        "list/:id/addTask/": "addTask",
 	        "settings/": 'settings',
-	        "list/update/:id": "update"
+	        "task/update/:id": "updateTask",
+	        "list/update/:id": "updateList"
 	    }
 	});
 
@@ -38,9 +39,14 @@ var app = app || {};
 		new app.Settings();
 	});
 
-	app.router.on('route:update', function(id)
+	app.router.on('route:updateTask', function(id)
 	{
 		new app.UpdateTask({modelId: id, model: app.Tasks});
+	});
+
+	app.router.on('route:updateList', function(id)
+	{
+		new app.UpdateTask({modelId: id, model: app.List});
 	});
 
 	Backbone.history.start();
