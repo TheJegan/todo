@@ -67,13 +67,21 @@ router.put('/:listId', env.isAuthenticated, function(req, res, next)
 router.delete('/:id', env.isAuthenticated, function(req, res, next)
 {
 	var listId = req.params.id;
-
-	List.find({'_id': id}, function(err, t)
+	// ( respond when all list and associated tasks have been deleted )
+	List.find({'_id': listId}, function(err, t)
 	{
 		if(!err)
 		{
-			res.send({'status': 'ok'});
 		}
 	}).remove().exec();
+
+	Task.find({'_list': listId}, function(err, t)
+	{
+		if(!err)
+		{
+		}
+	}).remove().exec();
+
+	res.send({'status': 'ok'});
 })
 module.exports = router;
