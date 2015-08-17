@@ -25,12 +25,14 @@ var app = app || {};
 
 	app.router.on('route:addList', function()
 	{
-		new app.CreateList();
+		//new app.CreateList();
+		new app.Create({model: app.ListModel});
 	});
 
 	app.router.on('route:addTask', function(id)
 	{
-		new app.CreateTask({listId: id});
+		// new app.CreateTask({listId: id});
+		new app.Create({model: app.TaskModel, listId:id})
 	});
 
 	app.router.on('route:settings', function()
@@ -41,7 +43,7 @@ var app = app || {};
 
 	app.router.on('route:updateTask', function(id)
 	{
-		new app.Update({modelId: id, model: app.Tasks});
+		new app.Update({modelId: id, model: app.Task});
 	});
 
 	app.router.on('route:updateList', function(id)
