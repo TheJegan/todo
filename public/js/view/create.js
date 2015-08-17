@@ -26,7 +26,7 @@ var app =  app || {};
 			var name = $('#modelName').val();
 			var model = new this.model({name: name});
 
-			if(typeof this.options !== 'undefined')
+			if(typeof this.options.listId !== 'undefined')
 			{
 				model.urlRoot += '/' + this.options.listId;
 			}
@@ -34,7 +34,7 @@ var app =  app || {};
 			model.save({
 				success:function()
 				{
-					new app.MainView({model: self.model})
+					new app.MainView({model: app.Tasks})
 				}
 			});
 		}
