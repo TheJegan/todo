@@ -43,7 +43,7 @@ var app = app || {};
 
 	app.router.on('route:updateTask', function(id)
 	{
-		new app.Update({modelId: id, model: app.Task});
+		new app.Update({modelId: id, model: app.Tasks});
 	});
 
 	app.router.on('route:updateList', function(id)
