@@ -4,28 +4,17 @@ var app = app || {};
 {
 	app.MainView = Backbone.View.extend(
 	{
-		el: "#app",
-		template: Handlebars.compile( $('#main-template').html() ),
+		el: "#todo-body",
+		template: Handlebars.compile( $('#list-template').html() ),
 		initialize: function()
 		{
-			this.listenTo(this.model, 'reset', this.render);
-			this.model.fetch({reset: true});
-			
+			// this.listenTo(this.model, 'reset', this.render);
 			this.render();
 		},
 		render: function()
 		{
-			var List = this.model.toJSON();
-			var isLoggedIn = false;
-			var username = "";
-			
-			this.$el.html(this.template({
-				list: List,
-				user: username
-			}));
-		},
-		close: function() {
-		   // clearInterval(this.timer);
+			var list = this.template({list: this.model.toJSON()});
+			$(this.el).html(list);
 		}
 	});
 })(jQuery);

@@ -17,13 +17,11 @@
       <div id="menu">
       </div>
 
-  <!-- <div id="app"> -->
-    
-
-      <script id="main-template" type="text/x-handlebars-template">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+    <!-- refactor -->
+    <script id="menu-template" type="text/x-handlebars-template">
+          <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
-                <div class="navbar-header">
+              <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -34,42 +32,28 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul id="todo-menu" class="nav navbar-nav">
-                        {{#each list}}
-                          <li><a href="#/list/{{_id}}">{{name}}</a></li>
-                        {{/each}}
-                        
-                         
-                          {{#if user}}
-                                 <li> <a id="sync"> Sync</a></li>
-                                  <li> <a href="#/settings/"> Settings</a></li>
-
-                                  <li><a href="#/list/add/" style="font-size: 20px"> +List </a></li>
-                                
-                                
-                                  <li>
-
-                                    <div class="btn-group">
-                                      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                                        {{user.username}} 
-                                        <span class="caret"></span>
-                                      </a>
-                                      <ul class="dropdown-menu">
-                                        <li><a tabindex="-1" href="/user/logout">Log Out</a></li>
-                                      </ul>
-                                    </div>
-
-                                    </lli>
-
-                                
-                          {{else}}
-                              <li><a href="/auth/twitter"> Login With Twitter</a></li>
-                          {{/if}}
-                        
+                      <li> <a href="#"> share </a></li>
+                      <li> <a href="#"> sync </a></li>
+                      <li> <a href="#"> search </a></li>
                     </ul>
-                </div><!--/.nav-collapse -->
+                </div>
             </div>
-        </nav>
-      </script>
+          </nav>
+    </script>
+
+    <script id="list-template" type="text/x-handlebars-template">
+        <a href="#/list/{{id}}/addTask/" style="font-size: 20px"> +Task </a>
+             
+             <strong>List</strong>
+             {{#each list}}    
+              
+                <div><a href="#"> {{name}}  </a>
+                </div>
+            {{/each}}
+    </script>    
+    <!-- end refactor -->
+
+    
 
       <script id="user-template" type="text/x-handlebars-template">
 
@@ -96,52 +80,9 @@
       </script>
 
 
-      <script id="menu-template" type="text/x-handlebars-template">
-           <footer class="footer">
-          <div id='footer-menu' class="container">      
-            {{#each list}}
-              <p class="text-muted">
-                <a data-id="{{_id}}" class='menuItem'>{{name}}</a>
-              </p>
-            {{/each}}
-          </div>
-        </footer>
-      </script>
+     
 
-      <script id="list-template" type="text/x-handlebars-template">
-            <a href="#/list/{{id}}/addTask/" style="font-size: 20px"> +Task </a>
-             {{name}} <br />  
-             {{#each tasks}}    
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" data-id="{{_id}}" > 
-                  <!-- span class="delete"> x </span --> 
-                  <span class="taskName">{{name}} </span>            
-                  <a href="#/task/update/{{_id}}"> > </a>
-                </label>
-              </div>
-            </div>
-            {{/each}}
-
-            <div id="myModal" class="modal fade">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Modal title</h4>
-                  </div>
-                  <div class="modal-body">
-                    <p>Are you sure you want to delete {{task}}</p>
-                  </div>
-                  <div class="modal-footer">
-                    <button id="no" type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                    <button id="yes" type="button" class="btn btn-primary">Yes</button>
-                  </div>
-                </div><!-- /.modal-content -->
-              </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-      </script>
-
+    
       <script id="view-template" type="text/x-handlebars-template">
             <div class="radio">
                 <label>
@@ -168,17 +109,6 @@
       </script>
 
 
-      <script id="menu-template" type="text/x-handlebars-template">
-               <footer class="footer">  
-                  <div id='footer-menu' class="container">      
-                    {{#each list}}
-                      <p class="text-muted">
-                        <a data-id="{{_id}}" class='menuItem'>{{name}}</a>
-                      </p>
-                    {{/each}}
-                  </div>
-                </footer>
-      </script>
 
       <script id="settings-template" type="text/x-handlebars-template">
                 <div>Sync My Tasks Every</div>

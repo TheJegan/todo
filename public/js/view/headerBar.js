@@ -4,7 +4,7 @@ var app = app || {};
 {
 	app.HeaderMenu = Backbone.View.extend({
 		el: '#header',
-		template: Handlebars.compile( $('#main-template').html() ),
+		template: Handlebars.compile( $('#menu-template').html() ),
 		events: {
 			'click #sync': 'sync',
 			'click .deleteList': 'delete'
@@ -54,7 +54,7 @@ var app = app || {};
 		render: function()
 		{
 			var list = this.model.toJSON();
-			$(this.el).html( this.template({list: list, user: app.User.toJSON()[0]}) );
+			$(this.el).html( this.template({list: list}) );
 		}
 	});
 })(jQuery);
