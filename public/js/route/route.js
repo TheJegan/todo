@@ -19,7 +19,6 @@ var app = app || {};
 
 	app.router.on('route:renderList', function(id) 
 	{	
-		// var TaskVM = app.GetTask(id);
 		new app.ReadTask({listId: id, model: app.Tasks});
 	});
 

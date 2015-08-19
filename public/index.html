@@ -10,7 +10,9 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-      <div id="header"></div>
+      <div id="header">
+
+      </div>
 
       <div id="todo-body" class="container"></div>
       
@@ -18,6 +20,12 @@
       </div>
 
     <!-- refactor -->
+    <script id="login-template" type="text/x-handlebars-template">
+         <ul class="nav nav-pills  nav-stacked">
+            <li role="presentation"><a href="/auth/twitter"> login </a> </li>        
+        </ul>
+    </script>
+
     <script id="menu-template" type="text/x-handlebars-template">
           <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
@@ -33,7 +41,7 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul id="todo-menu" class="nav navbar-nav">
                       <li> <a href="#"> share </a></li>
-                      <li> <a href="#"> sync </a></li>
+                      <li> <a id='sync' href="#"> sync </a></li>
                       <li> <a href="#"> search </a></li>
                     </ul>
                 </div>
@@ -44,12 +52,16 @@
     <script id="list-template" type="text/x-handlebars-template">    
         <a> Rmnder</a>  <a href="#/list/add/"> +List</a>   
         <div><strong>List</strong></div>
+        <ul class="nav nav-pills  nav-stacked">
         {{#each list}}          
-            <div> <a href="#/list/{{_id}}"> {{name}}</a> </div>
+              <li role="presentation"><a href="#/list/{{_id}}"> {{name}}</a> </li>
         {{/each}}
+        </ul>
     </script>  
 
     <script id="task-template" type="text/x-handlebars-template">    
+      
+    <a href="#/list/update/{{listId}}"> {{listName}} </a>   
       {{#each tasks}}    
         <div class="checkbox">
             <label>
@@ -61,7 +73,12 @@
           </div>
         </div>
       {{/each}}
+      <div> <a href="#/list/{{listId}}/addTask/"> +Task </a> </div>
     </script>  
+
+    <script id="edit-task-template" type="text/x-handlebars-template">    
+
+    </script>
     <!-- end refactor -->
 
     
@@ -115,8 +132,10 @@
       </script>
 
        <script id="add-template" type="text/x-handlebars-template">
+          <div id="add">
               <input type="text" hint="list name" id="modelName"/>
               <button id="btnAdd">Add</button>
+          </div>
       </script>
 
 
@@ -150,6 +169,7 @@
     <script src="js/view/update.js"></script>
     <script src="js/view/menu.js"></script>
     <script src="js/view/settings.js"></script>
+    <script src="js/view/login.js"></script>
     <script src="js/app.js"></script>
     <script src="js/route/route.js"></script>
  

@@ -4,16 +4,26 @@ var app = app || {};
 {
 	app.sec = 0;
 
-	app.List.fetch({reset: true, success: function()
+	app.User.fetch({reset: true,
+		success: function(model, response, options) 
 		{
-			new app.HeaderMenu({model: app.List});
-			new app.MainView({model: app.List});
+			app.List.fetch({reset: true});	
+			app.Tasks.fetch({reset: true});
+		},
+		error: function(a,b,c)
+		{
+			//flash message
+			new app.LoginView();
 		}
+
 	});
-	app.Tasks.fetch({reset: true});
-	app.User.fetch({reset: true});
+
+	app.List.on('reset', function(eventName)
+	{
+		new app.HeaderMenu({model: app.List});
+		new app.MainView({model: app.List});
+	});
 	
 	
-	// new app.ReadTask({model: app.Tasks});
 	
 })();

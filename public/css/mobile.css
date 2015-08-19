@@ -22,3 +22,13 @@ body {
 	color: red;
   cursor: pointer;
 }
+
+#todo-body
+{
+  padding-top: 10px;
+}
+
+#add
+{
+  padding-top: 15px;
+}

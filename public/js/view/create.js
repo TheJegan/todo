@@ -34,9 +34,25 @@ var app =  app || {};
 			model.save({
 				success:function()
 				{
-					new app.MainView({model: app.Tasks})
+					/*
+					if(typeof self.options.listId !== 'undefined')
+					{
+						new app.ReadTask({listId: self.options.listId, model: app.Tasks});	
+					}else
+					{
+						new app.MainView({model: app.Tasks})
+					}
+					*/
 				}
 			});
+
+			if(typeof self.options.listId !== 'undefined')
+					{
+						new app.ReadTask({listId: self.options.listId, model: app.Tasks});	
+					}else
+					{
+						new app.MainView({model: app.Tasks})
+					}
 		}
 	});
 })(jQuery)
