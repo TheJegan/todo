@@ -32,3 +32,13 @@ body {
 {
   padding-top: 15px;
 }
+
+.view-task
+{
+    visibility:hidden; 
+}
+
+.view-task:hover
+{
+    visibility:visible; 
+}

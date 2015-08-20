@@ -13,15 +13,14 @@ var app = app || {};
 		{
 			var self = this;
 			
-			this.listenTo(app.User, 'reset', this.render);
-			this.listenTo(this.model, 'add', this.render);
-			this.listenTo(this.model, 'reset', this.render);
+			// this.listenTo(app.User, 'reset', this.render);
+			// this.listenTo(this.model, 'add', this.render);
+			// this.listenTo(this.model, 'reset', this.render);
 			this.render();
 		},
 		sync: function()
 		{
-			app.Tasks.fetch({reset: true});
-			app.List.fetch({reset: true});
+			app.sync();
 		},
 		delete: function(e)
 		{

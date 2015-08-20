@@ -12,7 +12,8 @@ var app = app || {};
 		{
 			var self = this;
 			this.options = options;
-
+			app.sync();
+			
 			this.listenTo(self.model, 'add', this.render);
 			this.listenTo(self.model, 'reset', this.render);
 			this.listenTo(self.model, 'change', this.render);
