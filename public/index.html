@@ -50,7 +50,7 @@
     </script>
 
     <script id="list-template" type="text/x-handlebars-template">    
-        <a> Rmnder</a>  <a href="#/list/add/"> +List</a>   
+        <a> Rmnder</a>  <a href="#/list/add/"> +List</a> 
         <div><strong>List</strong></div>
         <ul class="nav nav-pills  nav-stacked">
         {{#each list}}          
@@ -60,15 +60,16 @@
     </script>  
 
     <script id="task-template" type="text/x-handlebars-template">    
-        <a href="#/list/update/{{listId}}"> {{listName}} </a>   
+        <a href="#/list/update/{{listId}}"> {{listName}} </a>  <button id='done'> done </button>   
         {{#each tasks}}    
-          <div class="checkbox">
-              <label>
-                <input type="checkbox" data-id="{{_id}}" > 
-                <!-- span class="delete"> x </span --> 
-                <span class="taskName">{{name}} </span>            
-                <a href="#/task/update/{{_id}}" class="view-task"> > </a>
-              </label>
+          <div class='task'>
+            <div class="checkbox">
+                <label>
+                  <input type="checkbox" data-id="{{_id}}" > 
+                  <span class="taskName">{{name}} </span>            
+                  <a href="#/task/update/{{_id}}" class="view-task"> > </a>
+                </label>
+              </div>
             </div>
           </div>
         {{/each}}
@@ -76,7 +77,7 @@
     </script>  
 
     <script id="edit-task-template" type="text/x-handlebars-template">    
-          <input type="email" class="form-control" id="editModel" value="">
+          <input class='editTask' type="email" class="form-control" id="editModel" value="{{name}}">
     </script>
     <!-- end refactor -->
 
@@ -148,6 +149,7 @@
     <script src="js/view/menu.js"></script>
     <script src="js/view/settings.js"></script>
     <script src="js/view/login.js"></script>
+    <script src="js/view/editField.js"></script>
     <script src="js/app.js"></script>
     <script src="js/route/route.js"></script>
  

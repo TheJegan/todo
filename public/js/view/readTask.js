@@ -6,14 +6,16 @@ var app = app || {};
 		el: '#todo-body',
 		template: Handlebars.compile( $('#task-template').html() ),
 		events: {
-			'click .checkbox': 'showMenu'
+			'click .checkbox': 'showMenu',
+			'click .taskName': 'EditTask',
+			'click #done': 'UpdateTask'
 		},
 		initialize: function(options )
 		{
 			var self = this;
 			this.options = options;
 			app.sync();
-			
+
 			this.listenTo(self.model, 'add', this.render);
 			this.listenTo(self.model, 'reset', this.render);
 			this.listenTo(self.model, 'change', this.render);
@@ -36,6 +38,38 @@ var app = app || {};
 			$(this.el).html(
 				this.template(list_template)
 			);
+		},
+		EditTask: function(e)
+		{
+			//save everything that was previousely opened and the
+			//$('.taskName').show()
+			app.sync();
+
+			var TaskId = $(e.target).prev('input').data('id');
+			var input = new app.EditText({ModelId: TaskId, model: this.model}).render();
+			input = $(input).data('id', TaskId);
+
+			var $task =$(e.target).closest('.task');
+			$task.find('.taskName').hide()
+			$task.find('label').append(input);
+
+			$('#done').show();
+		},
+		UpdateTask: function(e)
+		{
+			var $task = $('#editModel');
+
+
+			var taskModel = this.model.get($task.data('id'));
+			taskModel.set(
+			{
+				name: $task.val().trim()
+			});
+			taskModel.save({success: function()
+				{
+					app.sync();
+				}});
+			console.log('done');
 		}
 	});
 })(jQuery);

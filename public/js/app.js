@@ -4,10 +4,39 @@ var app = app || {};
 {
 	app.sec = 0;
 
-	app.sync = function()
+	app.sync = function(callback)
 	{
+		var taskFetchComplete = false;
+		var listFetchComplete = false;
+
 		app.Tasks.fetch({reset: true});
 		app.List.fetch({reset: true});
+
+		app.Tasks.on('reset', function()
+		{
+			taskFetchComplete =true;
+
+			if(listFetchComplete && taskFetchComplete)
+			{
+				if(typeof callback !== 'undefined')
+				{
+					callback();	
+				}
+			}
+		});
+
+		app.List.on('reset', function()
+		{
+			listFetchComplete = true;
+
+			if(listFetchComplete && taskFetchComplete)
+			{
+				if(typeof callback !== 'undefined')
+				{
+					callback();	
+				}
+			}
+		});
 	};
 
 	app.User.fetch({reset: true,

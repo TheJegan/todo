@@ -42,3 +42,8 @@ body {
 {
     visibility:visible; 
 }
+
+#done
+{
+  display: none;
+}
