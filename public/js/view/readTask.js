@@ -34,42 +34,62 @@ var app = app || {};
 					listName: list.name,
 					listId: this.options.listId
 				};
-
+			$(this.el).html('');
 			$(this.el).html(
 				this.template(list_template)
 			);
+
+			this.trigger('rendered');
 		},
 		EditTask: function(e)
 		{
 			//save everything that was previousely opened and the
 			//$('.taskName').show()
-			app.sync();
+			var self =this;
+			var TaskId = $(e.target).data('id');
+			this.UpdateTask();
+			this.model.fetch({reset: true});
 
-			var TaskId = $(e.target).prev('input').data('id');
-			var input = new app.EditText({ModelId: TaskId, model: this.model}).render();
-			input = $(input).data('id', TaskId);
+			this.on('rendered', function()
+			{
+				console.log('rendered');
+				var input = new app.EditText({ModelId: TaskId, model: self.model}).render();
+				input = $(input).data('id', TaskId);
 
-			var $task =$(e.target).closest('.task');
-			$task.find('.taskName').hide()
-			$task.find('label').append(input);
+				var $task = $('#' + TaskId); //$(e.target).closest('.task');
+				$task.find('.taskName').hide()
+				$task.find('label').append(input);
 
-			$('#done').show();
+				$('#done').show();
+
+				this.off('rendered');
+			})
+
+			
+		},
+		Edit: function()
+		{
+
 		},
 		UpdateTask: function(e)
 		{
 			var $task = $('#editModel');
-
-
 			var taskModel = this.model.get($task.data('id'));
-			taskModel.set(
+
+			if(taskModel)
 			{
-				name: $task.val().trim()
-			});
-			taskModel.save({success: function()
+				taskModel.set(
 				{
-					app.sync();
-				}});
-			console.log('done');
+					name: $task.val().trim()
+				});
+
+				taskModel.save(null,{
+					success: function(model, response)
+					{
+						app.sync();
+					}});
+				console.log('done');
+			}
 		}
 	});
 })(jQuery);

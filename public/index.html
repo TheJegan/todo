@@ -62,11 +62,11 @@
     <script id="task-template" type="text/x-handlebars-template">    
         <a href="#/list/update/{{listId}}"> {{listName}} </a>  <button id='done'> done </button>   
         {{#each tasks}}    
-          <div class='task'>
+          <div class='task' id="{{_id}}">
             <div class="checkbox">
                 <label>
-                  <input type="checkbox" data-id="{{_id}}" > 
-                  <span class="taskName">{{name}} </span>            
+                  <input type="checkbox"> 
+                  <span class="taskName" data-id="{{_id}}">{{name}}</span>            
                   <a href="#/task/update/{{_id}}" class="view-task"> > </a>
                 </label>
               </div>
