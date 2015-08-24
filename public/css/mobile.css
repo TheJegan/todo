@@ -1,11 +1,22 @@
 body {
   padding-top: 50px;
+  font-size: 18px
 }
 .starter-template {
   padding: 5px 15px;
   text-align: left;
 }
 
+.navbar-toggle
+{
+    background-color: 
+}
+
+.todo-navbar
+{
+    background-color: #fff;
+    border-color: #fff;
+}
 
 .footer {
   position: absolute;
@@ -63,11 +74,21 @@ body {
   background-color: #337ab7;
 }
 
+.nav-pills > li.task > a,
+.nav-pills > li.task > a:hover,
+.nav-pills > li.task > a:focus 
+{
+  color: #444;
+  background-color: #fff;
+  border: 1px solid #fff;
+}
+
 .nav-pills > li.header > a,
 .nav-pills > li.header > a:hover,
 .nav-pills > li.header > a:focus 
 {
-  color: #A1B8BF;
+  color: black;
+  font-weight: bolder;
   background-color: #337ab7;
   font-size: larger;
 }
@@ -102,4 +123,31 @@ body {
 .list-icons
 {
     padding-bottom: 5px;
+}
+
+.glyphicon {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.glyphicon-class,
+.icon{
+    width: 50%;
+    margin: 0 auto;
+}
+
+.navbar-toggle
+{
+    background-color: #337ab7;
+}
+
+.icon-bar
+{
+  background-color: #fff;
+}
+
+.taskName
+{
+    color: #6D6D6D;
 }

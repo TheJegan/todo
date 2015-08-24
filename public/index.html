@@ -29,7 +29,7 @@
     </script>
 
     <script id="menu-template" type="text/x-handlebars-template">
-          <nav class="navbar navbar-inverse navbar-fixed-top">
+          <nav class="navbar todo-navbar navbar-fixed-top">
             <div class="container">
               <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -79,27 +79,16 @@
             <a href="#">
               <div class="icon-container">
                 <div class="icon">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
                 </div>
                 <div>
-                  <span class="glyphicon-class">Camera</span>
+                  <span class="glyphicon-class">Reminder</span>
                 </div>
               </div>
             </a>
           </li>
 
-          <li role="presentation" class="active">
-            <a href="#">
-              <div class="icon-container">
-                <div class="icon">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                </div>
-                <div>
-                  <span class="glyphicon-class">Note</span>
-                </div>
-              </div>
-            </a>
-          </li>
+          
         </ul>
 
         <!--
@@ -145,7 +134,7 @@
         
         <ul class="nav nav-pills  nav-stacked">
               <li role="presentation" class="list header">
-                <a href="#/list/{{_id}}">[ x ] List</a> 
+                <a href="#/list/{{_id}}">List</a> 
               </li>
         {{#each list}}          
               <li role="presentation" class="list">
@@ -157,18 +146,20 @@
 
     <script id="task-template" type="text/x-handlebars-template">    
         <a href="#/list/update/{{listId}}"> {{listName}} </a>  <button id='done'> done </button>   
-        {{#each tasks}}    
-          <div class='task' id="{{_id}}">
-            <div class="checkbox">
-                <label>
-                  <input type="checkbox"> 
-                  <span class="taskName" data-id="{{_id}}">{{name}}</span>            
-                  <a href="#/task/update/{{_id}}" class="view-task"> > </a>
-                </label>
+        
+          {{#each tasks}}  
+            <div class='task' id="{{_id}}">
+              <div class="checkbox">
+                  <label>
+                    <input type="checkbox"> 
+                    <span class="taskName" data-id="{{_id}}">{{name}}</span>            
+                    <!-- a href="#/task/update/{{_id}}" class="view-task"> > </a-->
+                  </label>
+                </div>
               </div>
             </div>
-          </div>
-        {{/each}}
+          {{/each}}
+        
         <div> <a href="#/list/{{listId}}/addTask/"> +Task </a> </div>
     </script>  
 

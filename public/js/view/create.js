@@ -15,7 +15,7 @@ var app =  app || {};
 		},
 		render: function()
 		{
-			$(this.el).html(this.template({model: this.option.modelName}));
+			$(this.el).html(this.template({model: this.options.modelName}));
 		},
 		AddModel: function(e)
 		{
