@@ -49,8 +49,8 @@ var app = app || {};
 			var TaskId = $(e.target).data('id');
 			
 			// sync if it was in edit mode
-			this.UpdateTask();
-			// this.model.fetch({reset: true});
+			// this.UpdateTask();
+			this.model.fetch({reset: true});
 
 			this.on('rendered', function()
 			{
