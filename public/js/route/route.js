@@ -25,13 +25,13 @@ var app = app || {};
 	app.router.on('route:addList', function()
 	{
 		//new app.CreateList();
-		new app.Create({model: app.ListModel});
+		new app.Create({model: app.ListModel, modelName: 'List'});
 	});
 
 	app.router.on('route:addTask', function(id)
 	{
 		// new app.CreateTask({listId: id});
-		new app.Create({model: app.TaskModel, listId:id})
+		new app.Create({model: app.TaskModel, listId:id, modelName: 'Task'});
 	});
 
 	app.router.on('route:settings', function()

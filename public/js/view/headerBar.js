@@ -7,7 +7,8 @@ var app = app || {};
 		template: Handlebars.compile( $('#menu-template').html() ),
 		events: {
 			'click #sync': 'sync',
-			'click .deleteList': 'delete'
+			'click .deleteList': 'delete',
+			'click .navbar-brand': 'home'
 		},
 		initialize: function()
 		{
@@ -54,6 +55,10 @@ var app = app || {};
 		{
 			var list = this.model.toJSON();
 			$(this.el).html( this.template({list: list}) );
+		},
+		home: function()
+		{
+			new app.MainView({model: app.List});
 		}
 	});
 })(jQuery);

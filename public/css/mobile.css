@@ -35,7 +35,7 @@ body {
 
 .view-task
 {
-    visibility:hidden; 
+    /*visibility:hidden; */
 }
 
 .view-task:hover
@@ -46,4 +46,60 @@ body {
 #done
 {
   display: none;
+}
+
+
+.presentation
+{
+  background-color: #A1B8BF;
+}
+
+
+.nav-pills > li.list > a,
+.nav-pills > li.list > a:hover,
+.nav-pills > li.list > a:focus 
+{
+  color: #fff;
+  background-color: #337ab7;
+}
+
+.nav-pills > li.header > a,
+.nav-pills > li.header > a:hover,
+.nav-pills > li.header > a:focus 
+{
+  color: #A1B8BF;
+  background-color: #337ab7;
+  font-size: larger;
+}
+
+.list-header-text
+{
+  font-family: cursive;  
+  font-weight: bolder;
+}
+
+
+.icon-group 
+{
+    display: block;
+}
+
+.icon-group .icon {
+    /*background-color: red;*/
+    padding: 15px 20px;
+    display: inline-block;
+    border: 1px grey solid;
+    text-align: center;
+    vertical-align: center;
+    border-radius: 50%;
+}
+
+.icon-container
+{
+    display: inline-block;
+}
+
+.list-icons
+{
+    padding-bottom: 5px;
 }

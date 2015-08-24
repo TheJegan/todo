@@ -19,9 +19,9 @@ passport.deserializeUser(function(obj, done) {
 });
 
 passport.use(new TwitterStrategy({
-    consumerKey: '15k4F26hVvP0F6vjvDCVkw', //env.config.twitter.consumerKey,
-    consumerSecret: 'MGdqxBUI0lLoLc7KZYnW0xRNPAfpUL9diWFLU559lA', //env.config.twitter.consumerKey,
-    callbackURL: 'http://localhost:3000/auth/twitter/callback'
+    consumerKey: env.twitter.consumerKey, //env.config.twitter.consumerKey,
+    consumerSecret: env.twitter.consumerSecret, //'MGdqxBUI0lLoLc7KZYnW0xRNPAfpUL9diWFLU559lA', //env.config.twitter.consumerKey,
+    callbackURL: env.twitter.callback 
   },
    function(token, tokenSecret, profile, done) {    
         console.log('profile');

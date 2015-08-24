@@ -22,7 +22,9 @@
     <!-- refactor -->
     <script id="login-template" type="text/x-handlebars-template">
          <ul class="nav nav-pills  nav-stacked">
-            <li role="presentation"><a href="/auth/twitter"> login </a> </li>        
+            <li role="presentation" class="list">
+              <a href="/auth/twitter"> login </a> 
+            </li>        
         </ul>
     </script>
 
@@ -36,7 +38,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">Todo List</a>
+                    <a class="navbar-brand" href="#">Todo List</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul id="todo-menu" class="nav navbar-nav">
@@ -50,11 +52,105 @@
     </script>
 
     <script id="list-template" type="text/x-handlebars-template">    
-        <a> Rmnder</a>  <a href="#/list/add/"> +List</a> 
-        <div><strong>List</strong></div>
+        <div class="list-header-text"> Create a new </div>
+        
+        <!--
+        <a> Rmnder</a>  
+        <a href="#/list/add/"> +List</a> 
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        <a> +Todo</a>
+        -->
+
+        <ul class="nav nav-pills list-icons">
+          <li role="presentation" class="active">
+            <a href="#/list/add/">
+              <div class="icon-container">
+                <div class="icon">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                </div>
+                <div>
+                  <span class="glyphicon-class">List</span>
+                </div>
+              </div>
+            </a>
+          </li>
+          
+          <li role="presentation" class="active">
+            <a href="#">
+              <div class="icon-container">
+                <div class="icon">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                </div>
+                <div>
+                  <span class="glyphicon-class">Camera</span>
+                </div>
+              </div>
+            </a>
+          </li>
+
+          <li role="presentation" class="active">
+            <a href="#">
+              <div class="icon-container">
+                <div class="icon">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                </div>
+                <div>
+                  <span class="glyphicon-class">Note</span>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+
+        <!--
+         <div class="icon-group">
+
+            <div class="icon-container">
+              <div class="icon">
+                  <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+              </div>
+              <div>
+                <span class="glyphicon-class">List</span>
+              </div>
+            </div>
+
+            <div class="icon-container">
+              <div class="icon">
+                  <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+              </div>
+              <div>
+                <span class="glyphicon-class">Text</span>
+              </div>
+            </div>
+
+            <div class="icon-container">
+              <div class="icon">
+                  <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+              </div>
+              <div>
+                <span class="glyphicon-class">Camera</span>
+              </div>
+            </div>
+
+            <div class="icon-container">
+              <div class="icon">
+                  <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+              </div>
+              <div>
+                <span class="glyphicon-class">Photos</span>
+              </div>
+            </div>
+        </div>
+        -->
+        
         <ul class="nav nav-pills  nav-stacked">
+              <li role="presentation" class="list header">
+                <a href="#/list/{{_id}}">[ x ] List</a> 
+              </li>
         {{#each list}}          
-              <li role="presentation"><a href="#/list/{{_id}}"> {{name}}</a> </li>
+              <li role="presentation" class="list">
+                <a href="#/list/{{_id}}"> {{name}}</a> 
+              </li>
         {{/each}}
         </ul>
     </script>  
@@ -108,17 +204,25 @@
       </script>
 
       <script id="update-template" type="text/x-handlebars-template">
-            <input id="model_name" type="text" value="{{name}}">
-            <button id="update"> update </button>
-            <button id="delete"> delete </button>
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Edit</label>
+                <input type="email" class="form-control" id="model_name"  value="{{name}}">
+              </div>
+              <button id="update" type="submit" class="btn btn-default">update</button>
+              <button id="delete" type="submit" class="btn btn-default">delete</button>
+           </form> 
       </script>
 
 
        <script id="add-template" type="text/x-handlebars-template">
-          <div id="add">
-              <input type="text" hint="list name" id="modelName"/>
-              <button id="btnAdd">Add</button>
-          </div>
+          <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">{{model}} Name</label>
+              <input type="email" class="form-control" id="modelName" placeholder="{{model}}">
+            </div>
+            <button id="btnAdd" type="submit" class="btn btn-default">Submit</button>
+          </form>  
       </script>
 
       <script id="settings-template" type="text/x-handlebars-template">
