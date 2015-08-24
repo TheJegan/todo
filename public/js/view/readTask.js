@@ -50,7 +50,7 @@ var app = app || {};
 			
 			// sync if it was in edit mode
 			this.UpdateTask();
-			this.model.fetch({reset: true});
+			// this.model.fetch({reset: true});
 
 			this.on('rendered', function()
 			{
