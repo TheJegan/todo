@@ -9,7 +9,8 @@ var twitterStrategy = {
 // "http://192.168.0.3:3000/auth/twitter/callback"
 var config = {
 	twitter: twitterStrategy,
-	mongooseURL: 'mongodb://localhost/todo',
+	// mongooseURL: 'mongodb://localhost/todo',
+	mongooseURL: 'mongodb://jegan:todo@ds035563.mongolab.com:35563/todo',
 	isAuthenticated: function(req, res, next)
 	{
 		 if (req.isAuthenticated()) { 
