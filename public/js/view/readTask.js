@@ -32,7 +32,7 @@ var app = app || {};
 			var list = app.List.get(this.options.listId);
 			if(list)
 			{
-				list.toJSON();	
+				list = list.toJSON();	
 				var list_template = {
 						id: this.options.listId, 
 						tasks: _.map( task, function( model ){ return model.toJSON(); } ),
