@@ -2,7 +2,7 @@ var twitterStrategy = {
 	consumerKey: "15k4F26hVvP0F6vjvDCVkw",
 	consumerSecret: "MGdqxBUI0lLoLc7KZYnW0xRNPAfpUL9diWFLU559lA",
 	// callback: 'http://192.168.0.3:3000/auth/twitter/callback'
-	callback: 'http://localhost:3000/auth/twitter/callback'
+	callback: 'https://infinite-fjord-1986.herokuapp.com/auth/twitter/callback'
 
 }
   
