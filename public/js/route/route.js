@@ -19,35 +19,55 @@ var app = app || {};
 
 	app.router.on('route:renderList', function(id) 
 	{	
-		new app.ReadTask({listId: id, model: app.Tasks});
+		if(typeof app.FrmReadTask !== 'undefined')
+		{
+			app.FrmReadTask.close();	
+		}
+		
+		app.FrmReadTask = new app.ReadTask({listId: id, model: app.Tasks});
 	});
 
 	app.router.on('route:addList', function()
 	{
-		//new app.CreateList();
-		new app.Create({model: app.ListModel, modelName: 'List'});
+		if(typeof app.FrmCreate !== 'undefined')
+		{
+			app.FrmCreate.close();	
+		}
+		app.FrmCreate = new app.Create({model: app.ListModel, modelName: 'List'});
 	});
 
 	app.router.on('route:addTask', function(id)
 	{
-		// new app.CreateTask({listId: id});
-		new app.Create({model: app.TaskModel, listId:id, modelName: 'Task'});
+		if(typeof app.FrmCreate !== 'undefined')
+		{
+			app.FrmCreate.close();	
+		}
+		
+		app.FrmCreate = new app.Create({model: app.TaskModel, listId:id, modelName: 'Task'});
 	});
 
 	app.router.on('route:settings', function()
-	{
-		// new app.CreateTask({listId: id});
-		new app.Settings();
+	{		
+		// new app.Settings();
 	});
 
 	app.router.on('route:updateTask', function(id)
 	{
-		new app.Update({modelId: id, model: app.Tasks});
+		if(typeof app.FrmUpdate !== 'undefined')
+		{
+			app.FrmUpdate.close();
+		}
+		app.FrmUpdate = new app.Update({modelId: id, model: app.Tasks});
 	});
 
 	app.router.on('route:updateList', function(id)
 	{
-		new app.Update({modelId: id, model: app.List});
+		if(typeof app.FrmUpdate !== 'undefined')
+		{
+			app.FrmUpdate.close();
+		}
+
+		app.FrmUpdate =new app.Update({modelId: id, model: app.List});
 	});
 
 	Backbone.history.start();

@@ -10,8 +10,11 @@ var app =  app || {};
 		},
 		initialize: function(option)
 		{
-			this.options = option;
-			this.render();
+			if(option)
+			{
+				this.options = option;
+				this.render();	
+			}			
 		},
 		render: function()
 		{
@@ -40,12 +43,15 @@ var app =  app || {};
 
 
 			if(typeof self.options.listId !== 'undefined')
-					{
-						new app.ReadTask({listId: self.options.listId, model: app.Tasks});	
-					}else
-					{
-						new app.MainView({model: app.Tasks})
-					}
-		}
+			{
+				new app.ReadTask({listId: self.options.listId, model: app.Tasks});	
+			}else
+			{
+				new app.MainView({model: app.List})
+			}
+		},
+		close: function() {	      
+       		this.$el.off(); 
+	    }
 	});
 })(jQuery)

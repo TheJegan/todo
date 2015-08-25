@@ -70,5 +70,4 @@ var app = app || {};
 		new app.LoginView();
 	})
 	
-	
 })();

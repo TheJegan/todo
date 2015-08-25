@@ -8,13 +8,21 @@ var app = app || {};
 		template: Handlebars.compile( $('#list-template').html() ),
 		initialize: function()
 		{
-			// this.listenTo(this.model, 'reset', this.render);
-			this.render();
+			
+			if(this.model)
+			{
+				// this.listenTo(this.model, 'reset', this.render);
+				this.render();
+			}
 		},
 		render: function()
 		{
 			var list = this.template({list: this.model.toJSON()});
 			$(this.el).html(list);
+		},
+		close: function()
+		{
+			this.$el.off(); 
 		}
 	});
 })(jQuery);

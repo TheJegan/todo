@@ -14,7 +14,7 @@ var app = app || {};
 		{
 			var self = this;
 			
-			// this.listenTo(app.User, 'reset', this.render);
+			//this.listenTo(app.User, 'reset', this.render);
 			// this.listenTo(this.model, 'add', this.render);
 			// this.listenTo(this.model, 'reset', this.render);
 			this.render();
@@ -58,7 +58,12 @@ var app = app || {};
 		},
 		home: function()
 		{
-			new app.MainView({model: app.List});
+			if(typeof app.FrmMain !== 'undefined')
+			{
+				app.FrmMain.close()	
+				app.FrmReadTask.close();
+			}	
+			app.FrmMain = new app.MainView({model: app.List});
 		}
 	});
 })(jQuery);

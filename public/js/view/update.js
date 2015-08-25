@@ -11,12 +11,15 @@ var app = app || {};
 		template: Handlebars.compile($('#update-template').html()),
 		initialize: function(options)
 		{	
-			this.modelId = options.modelId;
-			
-			this.listenTo(this.model, 'add', this.render);
-			this.listenTo(this.model, 'reset', this.render);
+			if(options)
+			{
+				this.modelId = options.modelId;
+				
+				this.listenTo(this.model, 'add', this.render);
+				this.listenTo(this.model, 'reset', this.render);
 
-			this.render();
+				this.render();
+			}
 		},
 		render: function()
 		{
@@ -42,6 +45,9 @@ var app = app || {};
 					console.log('success');
 				}
 			})
-		}
+		},
+		close: function() {	      
+       		this.$el.off(); 
+	    }
 	});
 })(jQuery);
