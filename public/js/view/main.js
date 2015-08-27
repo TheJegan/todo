@@ -8,21 +8,22 @@ var app = app || {};
 		template: Handlebars.compile( $('#list-template').html() ),
 		initialize: function()
 		{
+			this.listenTo(this.model, 'reset', this.render);
+			this.model.fetch({reset: true});
+			this.render();
 			
-			if(this.model)
-			{
-				// this.listenTo(this.model, 'reset', this.render);
-				this.render();
-			}
 		},
 		render: function()
 		{
+			if(app.FrmHeader){ app.FrmHeader.close(); }
+
+			app.FrmHeader = new app.HeaderMenu({model: app.List, syncModel: this.model});
 			var list = this.template({list: this.model.toJSON()});
 			$(this.el).html(list);
 		},
 		close: function()
 		{
-			this.$el.off(); 
+			this.off(); 
 		}
 	});
 })(jQuery);

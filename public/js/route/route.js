@@ -19,53 +19,37 @@ var app = app || {};
 
 	app.router.on('route:renderList', function(id) 
 	{	
-		if(typeof app.FrmReadTask !== 'undefined')
-		{
-			app.FrmReadTask.close();	
-		}
-		
+		if(typeof app.FrmReadTask !== 'undefined'){app.FrmReadTask.close()}
 		app.FrmReadTask = new app.ReadTask({listId: id, model: app.Tasks});
 	});
 
 	app.router.on('route:addList', function()
 	{
-		if(typeof app.FrmCreate !== 'undefined')
-		{
-			app.FrmCreate.close();	
-		}
+		if(typeof app.FrmCreate !== 'undefined'){app.FrmCreate.close()}
 		app.FrmCreate = new app.Create({model: app.ListModel, modelName: 'List'});
 	});
 
 	app.router.on('route:addTask', function(id)
 	{
-		if(typeof app.FrmCreate !== 'undefined')
-		{
-			app.FrmCreate.close();	
-		}
-		
+		if(typeof app.FrmCreate !== 'undefined'){app.FrmCreate.close()}
 		app.FrmCreate = new app.Create({model: app.TaskModel, listId:id, modelName: 'Task'});
+
 	});
 
-	app.router.on('route:settings', function()
-	{		
-		// new app.Settings();
-	});
+	// app.router.on('route:settings', function()
+	// {		
+	// 	// new app.Settings();
+	// });
 
 	app.router.on('route:updateTask', function(id)
 	{
-		if(typeof app.FrmUpdate !== 'undefined')
-		{
-			app.FrmUpdate.close();
-		}
+		if(typeof app.FrmUpdate !== 'undefined'){ app.FrmUpdate.close();}
 		app.FrmUpdate = new app.Update({modelId: id, model: app.Tasks});
 	});
 
 	app.router.on('route:updateList', function(id)
 	{
-		if(typeof app.FrmUpdate !== 'undefined')
-		{
-			app.FrmUpdate.close();
-		}
+		if(typeof app.FrmUpdate !== 'undefined'){ app.FrmUpdate.close();}
 
 		app.FrmUpdate =new app.Update({modelId: id, model: app.List});
 	});

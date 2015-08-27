@@ -15,10 +15,6 @@ var app = app || {};
 		initialize: function()
 		{
 
-		},
-		url: function() 
-		{
-		    return "/task/" + this.id;
 		}
 	})
 })();

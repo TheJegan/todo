@@ -1,44 +1,6 @@
 var app = app || {};
 
-(function()
-{
-	app.sec = 0;
-
-	app.sync = function(callback)
-	{
-		var taskFetchComplete = false;
-		var listFetchComplete = false;
-
-		app.Tasks.fetch({reset: true});
-		app.List.fetch({reset: true});
-
-		app.Tasks.on('reset', function()
-		{
-			taskFetchComplete =true;
-
-			if(listFetchComplete && taskFetchComplete)
-			{
-				if(typeof callback !== 'undefined')
-				{
-					callback();	
-				}
-			}
-		});
-
-		app.List.on('reset', function()
-		{
-			listFetchComplete = true;
-
-			if(listFetchComplete && taskFetchComplete)
-			{
-				if(typeof callback !== 'undefined')
-				{
-					callback();	
-				}
-			}
-		});
-	};
-
+(function(){
 	app.User.fetch({reset: true,
 		success: function(model, response, options) 
 		{
@@ -52,22 +14,19 @@ var app = app || {};
 	});
 
 	app.User.on('authorized', function()
-	{
-		app.List.fetch({reset: true});			
-		app.Tasks.fetch(
-			{	
-				reset: true, 
-				success: function()
-				{
-					new app.HeaderMenu({model: app.List});
-					new app.MainView({model: app.List});
-				}
-			});
+	{		
+		//load header
+		//load main
+		app.List.fetch({reset: true});
+		app.Tasks.fetch({reset: true});
+
+
+		if(app.FrmMain){app.FrmMain.close();}
+		app.FrmMain = new app.MainView({model: app.List});
 	});
 
 	app.User.on('not_authorized', function()
 	{
 		new app.LoginView();
-	})
-	
+	});
 })();

@@ -10,18 +10,19 @@ var app = app || {};
 			'click .deleteList': 'delete',
 			'click .navbar-brand': 'home'
 		},
-		initialize: function()
+		initialize: function(option)
 		{
 			var self = this;
+			this.options = option;
 			
-			//this.listenTo(app.User, 'reset', this.render);
-			// this.listenTo(this.model, 'add', this.render);
-			// this.listenTo(this.model, 'reset', this.render);
+			this.listenTo(app.User, 'reset', this.render);
+			this.listenTo(this.model, 'add', this.render);
+			this.listenTo(this.model, 'reset', this.render);
 			this.render();
 		},
 		sync: function()
 		{
-			app.sync();
+			this.options.syncModel.fetch({reset: true});
 		},
 		delete: function(e)
 		{
@@ -58,12 +59,12 @@ var app = app || {};
 		},
 		home: function()
 		{
-			if(typeof app.FrmMain !== 'undefined')
-			{
-				app.FrmMain.close()	
-				app.FrmReadTask.close();
-			}	
+			if(app.FrmMain){app.FrmMain.close();}
 			app.FrmMain = new app.MainView({model: app.List});
+		},
+		close: function()
+		{
+			this.$el.off();
 		}
 	});
 })(jQuery);

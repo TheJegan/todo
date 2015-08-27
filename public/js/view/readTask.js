@@ -22,7 +22,7 @@ var app = app || {};
 				this.listenTo(self.model, 'change', this.render);
 				this.listenTo(self.model, 'destroy', this.render);
 				
-				app.sync();
+				this.model.fetch({reset: true});
 				this.render();
 			}
 		},
@@ -30,6 +30,11 @@ var app = app || {};
 		{
 			var task = this.model.where({_list: this.options.listId});
 			var list = app.List.get(this.options.listId);
+
+			if(app.FrmHeader){ app.FrmHeader.close(); }
+
+			app.FrmHeader = new app.HeaderMenu({model: app.List, syncModel: this.model});
+
 			if(list)
 			{
 				list = list.toJSON();	
@@ -88,7 +93,7 @@ var app = app || {};
 		{
 			var $task = $('#editModel');
 			var taskModel = this.model.get($task.data('id'));
-
+			var self = this;
 
 			if(taskModel)
 			{
@@ -100,7 +105,7 @@ var app = app || {};
 				taskModel.save(null,{
 					success: function(model, response)
 					{
-						app.sync();
+						self.model.fetch();
 					}});
 				console.log('done');
 			}
