@@ -47,7 +47,8 @@ var app =  app || {};
 				new app.ReadTask({listId: self.options.listId, model: app.Tasks});	
 			}else
 			{
-				new app.MainView({model: app.List})
+				app.router.navigate('/');
+				new app.MainView({model: app.List});
 			}
 		},
 		close: function() {	      
