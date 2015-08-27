@@ -44,6 +44,7 @@ var app =  app || {};
 
 			if(typeof self.options.listId !== 'undefined')
 			{
+				app.router.navigate('/list/'+ self.options.listId);
 				new app.ReadTask({listId: self.options.listId, model: app.Tasks});	
 			}else
 			{

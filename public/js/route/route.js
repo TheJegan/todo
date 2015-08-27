@@ -44,7 +44,7 @@ var app = app || {};
 	app.router.on('route:updateTask', function(id)
 	{
 		if(typeof app.FrmUpdate !== 'undefined'){ app.FrmUpdate.close();}
-		app.FrmUpdate = new app.Update({modelId: id, model: app.Tasks});
+		app.FrmUpdate = new app.UpdateTask({modelId: id, model: app.List});
 	});
 
 	app.router.on('route:updateList', function(id)

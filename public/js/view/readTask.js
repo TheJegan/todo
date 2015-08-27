@@ -22,7 +22,7 @@ var app = app || {};
 				this.listenTo(self.model, 'change', this.render);
 				this.listenTo(self.model, 'destroy', this.render);
 				
-				this.model.fetch({reset: true});
+				// this.model.fetch({reset: true});
 				this.render();
 			}
 		},

@@ -144,6 +144,19 @@
         </ul>
     </script>  
 
+
+    <script id="move-task-template" type="text/x-handlebars-template">    
+        <div class="list-header-text"> Select List to move to </div>
+      
+        <ul class="nav nav-pills  nav-stacked">
+        {{#each list}}          
+              <li role="presentation" class="list">
+                <a href="#/list/{{_id}}" data-id="{{_id}}"> {{name}}</a> 
+              </li>
+        {{/each}}
+        </ul>
+    </script>  
+
     <script id="task-template" type="text/x-handlebars-template">    
         <a href="#/list/update/{{listId}}"> {{listName}} </a>  <button id='done'> done </button>   
         
@@ -153,7 +166,7 @@
                   <label>
                     <input type="checkbox"> 
                     <span class="taskName" data-id="{{_id}}">{{name}}</span>            
-                    <!-- a href="#/task/update/{{_id}}" class="view-task"> > </a-->
+                    <a href="#/task/update/{{_id}}" class="view-task"> > </a>
                   </label>
                 </div>
               </div>
@@ -205,6 +218,16 @@
            </form> 
       </script>
 
+      <script id="updateTask-template" type="text/x-handlebars-template">
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Edit</label>
+                <input class="form-control" id="model_name"  value="{{name}}">
+              </div>
+              <button id="update" class="btn btn-default">update</button>
+              <button id="delete" class="btn btn-default">delete</button>
+           </form> 
+      </script>
 
        <script id="add-template" type="text/x-handlebars-template">
           <form>
@@ -241,6 +264,7 @@
     <script src="js/view/readTask.js"></script>  
     <script src="js/view/headerBar.js"></script>
     <script src="js/view/update.js"></script>
+    <script src="js/view/updateTask.js"></script>
     <script src="js/view/menu.js"></script>
     <script src="js/view/settings.js"></script>
     <script src="js/view/login.js"></script>
