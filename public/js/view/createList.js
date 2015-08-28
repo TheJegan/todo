@@ -37,7 +37,11 @@ var app =  app || {};
 			model.save({
 				success:function()
 				{
-					
+					console.log('success');
+				},
+				error: function(a, b, c)
+				{
+					console.log(b);
 				}
 			});
 

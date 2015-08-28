@@ -4,7 +4,7 @@ var app = app || {};
 {
 	app.ReadTask = Backbone.View.extend({
 		el: '#todo-body',
-		template: Handlebars.compile( $('#task-template').html() ),
+		template: Handlebars.compile( $('#read-task-template').html() ),
 		events: {
 			'click .checkbox': 'showMenu',
 			'click .taskName': 'EditTask',

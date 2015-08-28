@@ -8,7 +8,7 @@ var app = app || {};
 			'click #update': 'updateModel',
 			'click #delete': 'deleteModel'
 		},
-		template: Handlebars.compile($('#update-template').html()),
+		template: Handlebars.compile($('#update-list-template').html()),
 		initialize: function(options)
 		{	
 			if(options)

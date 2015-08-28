@@ -157,7 +157,7 @@
         </ul>
     </script>  
 
-    <script id="task-template" type="text/x-handlebars-template">    
+    <script id="read-task-template" type="text/x-handlebars-template">    
         <a href="#/list/update/{{listId}}"> {{listName}} </a>  <button id='done'> done </button>   
         
           {{#each tasks}}  
@@ -181,12 +181,6 @@
     </script>
     <!-- end refactor -->
 
-    
-
-      <script id="user-template" type="text/x-handlebars-template">
-
-      </script>
-
       <script id="message-box-template" type="text/x-handlebars-template">
         <div id="msgbox" class="modal fade">
           <div class="modal-dialog">
@@ -207,7 +201,7 @@
         </div><!-- /.modal -->
       </script>
 
-      <script id="update-template" type="text/x-handlebars-template">
+      <script id="update-list-template" type="text/x-handlebars-template">
             <form>
               <div class="form-group">
                 <label for="exampleInputEmail1">Edit</label>
@@ -218,7 +212,7 @@
            </form> 
       </script>
 
-      <script id="updateTask-template" type="text/x-handlebars-template">
+      <script id="update-task-template" type="text/x-handlebars-template">
             <form>
               <div class="form-group">
                 <label for="exampleInputEmail1">Edit</label>
@@ -239,11 +233,6 @@
           </form>  
       </script>
 
-      <script id="settings-template" type="text/x-handlebars-template">
-                <div>Sync My Tasks Every</div>
-                <input id="interval" type="text" value="{{seconds}}" > 
-      </script>
-
     </div>
 
     <script src="js/lib/handlebars.js"></script>
@@ -260,10 +249,11 @@
     <script src="js/collection/task.js"></script>
     <script src="js/collection/user.js"></script>
     <script src="js/view/main.js"></script>
-    <script src="js/view/create.js"></script>
+    <script src="js/view/createList.js"></script>
+    <script src="js/view/createTask.js"></script>
     <script src="js/view/readTask.js"></script>  
     <script src="js/view/headerBar.js"></script>
-    <script src="js/view/update.js"></script>
+    <script src="js/view/updateList.js"></script>
     <script src="js/view/updateTask.js"></script>
     <script src="js/view/menu.js"></script>
     <script src="js/view/settings.js"></script>
