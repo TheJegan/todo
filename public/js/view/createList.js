@@ -10,11 +10,8 @@ var app =  app || {};
 		},
 		initialize: function(option)
 		{
-			if(option)
-			{
-				this.options = option;
-				this.render();	
-			}			
+			this.options = option;
+			this.render();			
 		},
 		render: function()
 		{

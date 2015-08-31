@@ -1,6 +1,5 @@
 var app = app || {};
 
-
 (function()
 {
 	var AppRouter = Backbone.Router.extend({
@@ -13,7 +12,7 @@ var app = app || {};
 	        "list/update/:id": "updateList"
 	    }
 	});
-
+	
 	// Initiate the router
 	app.router = new AppRouter;
 
@@ -35,11 +34,6 @@ var app = app || {};
 		app.FrmCreate = new app.CreateTask({model: app.TaskModel, listId:id, modelName: 'Task'});
 
 	});
-
-	// app.router.on('route:settings', function()
-	// {		
-	// 	// new app.Settings();
-	// });
 
 	app.router.on('route:updateTask', function(id)
 	{

@@ -10,11 +10,7 @@ var app =  app || {};
 		},
 		initialize: function(option)
 		{
-			if(option)
-			{
-				this.options = option;
-				this.render();	
-			}
+			this.options = option;
 			this.render();		
 		},
 		render: function()
@@ -32,9 +28,8 @@ var app =  app || {};
 			var model = new this.model({_id: TaskId, name: name, _list: this.options.listId});
 
 			app.Tasks.add(model);
-
 			app.router.navigate('/list/'+ self.options.listId);	
-					
+
 			if(typeof app.FrmReadTask !== 'undefined'){app.FrmReadTask.close()}
 			app.FrmReadTask = new app.ReadTask({listId: this.options.listId, model: app.Tasks});
 		},

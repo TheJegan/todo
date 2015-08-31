@@ -6,8 +6,7 @@ function guid() {
       .toString(16)
       .substring(1);
   }
-  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-    s4() + '-' + s4() + s4() + s4();
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
 (function(){
@@ -21,16 +20,12 @@ function guid() {
 		{
 			app.User.trigger('not_authorized');
 		}
-
 	});
 
 	app.User.on('authorized', function()
 	{		
-		//load header
-		//load main
 		app.List.fetch({reset: true});
 		app.Tasks.fetch({reset: true});
-
 
 		if(app.FrmMain){app.FrmMain.close();}
 		app.FrmMain = new app.MainView({model: app.List});

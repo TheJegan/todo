@@ -25,5 +25,5 @@ var app = app || {};
 		{
 			console.log('input');
 		}
-	})
+	});
 })(jQuery)

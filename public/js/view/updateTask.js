@@ -32,15 +32,6 @@ var app = app || {};
 			task.set({
 				_list: listId
 			});
-
-			// task.save({
-			// 	success: function()
-			// 	{
-			// 		app.Tasks.fetch({reset: true});
-			// 		console.log('success');
-			// 	}
-			// });
-
 		},
 		close: function()
 		{

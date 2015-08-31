@@ -19,7 +19,6 @@ var app = app || {};
 			this.listenTo(self.model, 'change', this.render);
 			this.listenTo(self.model, 'destroy', this.render);
 			
-			// this.model.fetch({reset: true});
 			this.render();
 			
 		},
@@ -29,7 +28,6 @@ var app = app || {};
 			var list = app.List.get(this.options.listId);
 
 			if(app.FrmHeader){ app.FrmHeader.close(); }
-
 			app.FrmHeader = new app.HeaderMenu({model: app.List, syncModel: this.model});
 
 			if(list)
@@ -56,22 +54,16 @@ var app = app || {};
 		},
 		EditTask: function(e)
 		{
-			//save everything that was previousely opened and the
-			//$('.taskName').show()
 			var self =this;
 			var TaskId = $(e.target).data('id');
 			
-			// sync if it was in edit mode
-			// this.UpdateTask();
-			this.model.fetch({reset: true});
-
 			this.on('rendered', function()
 			{
 				console.log('rendered');
 				var input = new app.EditText({ModelId: TaskId, model: self.model}).render();
 				input = $(input).data('id', TaskId);
 
-				var $task = $('#' + TaskId); //$(e.target).closest('.task');
+				var $task = $('#' + TaskId);
 				$task.find('.taskName').hide()
 				$task.find('label').append(input);
 
@@ -104,7 +96,6 @@ var app = app || {};
 					{
 						self.model.fetch();
 					}});
-				console.log('done');
 			}
 		},
 		close: function() {	      
