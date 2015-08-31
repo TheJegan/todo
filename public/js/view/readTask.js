@@ -12,19 +12,16 @@ var app = app || {};
 		},
 		initialize: function(options )
 		{
-			if(typeof options !== 'undefined')
-			{
-				var self = this;
-				this.options = options;
+			var self = this;
+			this.options = options;
 
-				this.listenTo(self.model, 'add', this.render);
-				this.listenTo(self.model, 'reset', this.render);
-				this.listenTo(self.model, 'change', this.render);
-				this.listenTo(self.model, 'destroy', this.render);
-				
-				// this.model.fetch({reset: true});
-				this.render();
-			}
+			this.listenTo(self.model, 'add', this.render);
+			this.listenTo(self.model, 'change', this.render);
+			this.listenTo(self.model, 'destroy', this.render);
+			
+			// this.model.fetch({reset: true});
+			this.render();
+			
 		},
 		render: function()
 		{

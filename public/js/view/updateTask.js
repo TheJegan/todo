@@ -11,8 +11,6 @@ var app = app || {};
 		initialize: function(option)
 		{
 			this.options = option;
-			this.listenTo(this.model, 'reset', this.render);
-			this.model.fetch({reset: true});
 			this.render();
 			
 		},
@@ -35,13 +33,13 @@ var app = app || {};
 				_list: listId
 			});
 
-			task.save({
-				success: function()
-				{
-					app.Tasks.fetch({reset: true});
-					console.log('success');
-				}
-			});
+			// task.save({
+			// 	success: function()
+			// 	{
+			// 		app.Tasks.fetch({reset: true});
+			// 		console.log('success');
+			// 	}
+			// });
 
 		},
 		close: function()

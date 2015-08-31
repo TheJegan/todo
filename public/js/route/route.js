@@ -26,13 +26,13 @@ var app = app || {};
 	app.router.on('route:addList', function()
 	{
 		if(typeof app.FrmCreate !== 'undefined'){app.FrmCreate.close()}
-		app.FrmCreate = new app.Create({model: app.ListModel, modelName: 'List'});
+		app.FrmCreate = new app.CreateList({model: app.ListModel, modelName: 'List'});
 	});
 
 	app.router.on('route:addTask', function(id)
 	{
 		if(typeof app.FrmCreate !== 'undefined'){app.FrmCreate.close()}
-		app.FrmCreate = new app.Create({model: app.TaskModel, listId:id, modelName: 'Task'});
+		app.FrmCreate = new app.CreateTask({model: app.TaskModel, listId:id, modelName: 'Task'});
 
 	});
 
@@ -51,7 +51,7 @@ var app = app || {};
 	{
 		if(typeof app.FrmUpdate !== 'undefined'){ app.FrmUpdate.close();}
 
-		app.FrmUpdate =new app.Update({modelId: id, model: app.List});
+		app.FrmUpdate =new app.UpdateList({modelId: id, model: app.List});
 	});
 
 	Backbone.history.start();

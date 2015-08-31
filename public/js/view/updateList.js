@@ -2,7 +2,7 @@ var app = app || {};
 
 (function($)
 {
-	app.Update = Backbone.View.extend({
+	app.UpdateList = Backbone.View.extend({
 		el: '#todo-body',
 		events: {
 			'click #update': 'updateModel',

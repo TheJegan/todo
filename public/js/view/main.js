@@ -9,7 +9,8 @@ var app = app || {};
 		initialize: function()
 		{
 			this.listenTo(this.model, 'reset', this.render);
-			this.model.fetch({reset: true});
+			this.listenTo(this.model, 'add', this.render);
+			// this.model.fetch({reset: true});
 			this.render();
 			
 		},

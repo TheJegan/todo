@@ -2,7 +2,7 @@ var app =  app || {};
 
 (function($)
 {
-	app.Create = Backbone.View.extend({
+	app.CreateList = Backbone.View.extend({
 		el: '#todo-body',
 		template: Handlebars.compile( $('#add-template').html() ),
 		events: {
@@ -27,34 +27,15 @@ var app =  app || {};
 
 			var self = this;
 			var name = $('#modelName').val();
-			var model = new this.model({name: name});
+			var listId = guid();
+			var model = new this.model({_id: listId, name: name});
 
-			if(typeof this.options.listId !== 'undefined')
-			{
-				model.urlRoot += '/' + this.options.listId;
-			}
+			app.List.add(model);			
+
+			app.router.navigate('/');
 			
-			model.save({
-				success:function()
-				{
-					console.log('success');
-				},
-				error: function(a, b, c)
-				{
-					console.log(b);
-				}
-			});
-
-
-			if(typeof self.options.listId !== 'undefined')
-			{
-				app.router.navigate('/list/'+ self.options.listId);
-				new app.ReadTask({listId: self.options.listId, model: app.Tasks});	
-			}else
-			{
-				app.router.navigate('/');
-				new app.MainView({model: app.List});
-			}
+			if(app.FrmMain){app.FrmMain.close();}
+			app.FrmMain = new app.MainView({model: app.List});
 		},
 		close: function() {	      
        		this.$el.off(); 
