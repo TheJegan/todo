@@ -169,3 +169,8 @@ a.disabled {
     pointer-events: none;
     color: grey;
 }
+
+#delete
+{
+  background-color: #CC5858;
+}
