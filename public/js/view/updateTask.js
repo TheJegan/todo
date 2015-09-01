@@ -6,7 +6,8 @@ var app = app || {};
 		el: "#todo-body",
 		template: Handlebars.compile( $('#move-task-template').html() ),
 		events: {
-			'click a': 'MoveTask'
+			'click a': 'moveTask',
+			'click delete': 'deleteTask'
 		},
 		initialize: function(option)
 		{
@@ -23,7 +24,7 @@ var app = app || {};
 			var list = this.template({list: this.model.toJSON()});
 			$(this.el).html(list);
 		},
-		MoveTask: function(e)
+		moveTask: function(e)
 		{
 			var listId = $(e.target).data('id');
 			var id = this.options.modelId;
@@ -32,6 +33,13 @@ var app = app || {};
 			task.set({
 				_list: listId
 			});
+		},
+		deleteTask: function(e)
+		{
+			var id = this.options.modelId;
+			var task = app.Tasks.get(id);
+
+			task.destroy();
 		},
 		close: function()
 		{

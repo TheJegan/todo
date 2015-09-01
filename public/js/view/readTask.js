@@ -70,9 +70,7 @@ var app = app || {};
 				$('#done').show();
 
 				this.off('rendered');
-			})
-
-			
+			});			
 		},
 		Edit: function()
 		{
