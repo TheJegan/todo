@@ -11,15 +11,8 @@ var app = app || {};
 		template: Handlebars.compile($('#update-list-template').html()),
 		initialize: function(options)
 		{	
-			if(options)
-			{
-				this.modelId = options.modelId;
-				
-				this.listenTo(this.model, 'add', this.render);
-				this.listenTo(this.model, 'reset', this.render);
-
-				this.render();
-			}
+			this.modelId = options.modelId;
+			this.render();
 		},
 		render: function()
 		{
@@ -38,13 +31,11 @@ var app = app || {};
 		deleteModel: function()
 		{
 			var model = this.model.get(this.modelId);
-			model.destroy(
-			{
-				success: function(a,b,c)
-				{
-					console.log('success');
-				}
-			})
+			model.destroy();
+
+			if(app.FrmMain){app.FrmMain.close();}
+			app.FrmMain = new app.MainView({model: app.List});
+			this.remove();
 		},
 		close: function() {	      
        		this.$el.off(); 

@@ -26,8 +26,9 @@ var app =  app || {};
 			var name = $('#modelName').val();
 			var TaskId = guid();
 			var model = new this.model({_id: TaskId, name: name, _list: this.options.listId});
-
 			app.Tasks.add(model);
+			model.save();
+
 			app.router.navigate('/list/'+ self.options.listId);	
 
 			if(typeof app.FrmReadTask !== 'undefined'){app.FrmReadTask.close()}
