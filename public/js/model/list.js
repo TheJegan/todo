@@ -11,7 +11,6 @@ var app = app || {};
 		},
 		idAttribute: '_id',
 		urlRoot: '/list',
-
 		initialize: function()
 		{
 

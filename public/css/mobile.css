@@ -162,3 +162,10 @@ body {
 {
   width: 97%;
 }
+
+
+
+a.disabled {
+    pointer-events: none;
+    color: grey;
+}

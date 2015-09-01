@@ -5,6 +5,7 @@ var app = app || {};
 	task = Backbone.Collection.extend({
 		url: '/task',
 		model: app.TaskModel,
+		localStorage: new Backbone.LocalStorage("Todo"),
 		ByListID: function(id)
 		{
 			filtered = this.filter(function (tasks) {

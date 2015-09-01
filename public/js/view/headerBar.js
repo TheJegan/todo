@@ -22,7 +22,7 @@ var app = app || {};
 		},
 		sync: function()
 		{
-			this.options.syncModel.fetch({reset: true});
+			this.options.syncModel.fetch();
 		},
 		delete: function(e)
 		{
