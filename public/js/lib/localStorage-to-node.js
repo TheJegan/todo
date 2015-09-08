@@ -98,7 +98,8 @@ function SyncTask(id)
 
 function Sync()
 {
-	SyncList();
+	// SyncList();
 	// SyncTask();
+	
 }
 

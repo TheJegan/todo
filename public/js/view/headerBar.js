@@ -23,7 +23,8 @@ var app = app || {};
 		sync: function()
 		{
 			// this.options.syncModel.fetch();
-			Sync();
+			// Sync();
+			app.List.fetch();
 		},
 		delete: function(e)
 		{
