@@ -25,24 +25,31 @@ router.post('/', env.isAuthenticated, function(req, res, next)
 {
 	console.log(req.body);
 	console.log("user " + req.user);
+	res.send(200, {status: '1'});
 
-	var list = new List({
-		name: req.body.name,
-		_user: req.user._id
-	});
+	var collection = req.body;
 
-	// res.send('complete');
-	list.save(function(err)
+	for(var i = 0; i < collection.length; i++)
 	{
-		if(err)
-		{
-			res.send(err);
-		}
-		else
-		{
-			res.send({"status" : "saved"});
-		}
-	});
+		
+	}
+	// var list = new List({
+	// 	name: req.body.name,
+	// 	_user: req.user._id
+	// });
+
+	// // res.send('complete');
+	// list.save(function(err)
+	// {
+	// 	if(err)
+	// 	{
+	// 		res.send(err);
+	// 	}
+	// 	else
+	// 	{
+	// 		res.send({"status" : "saved"});
+	// 	}
+	// });
 });
 
 router.put('/:listId', env.isAuthenticated, function(req, res, next)

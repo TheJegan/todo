@@ -22,7 +22,8 @@ var app = app || {};
 		},
 		sync: function()
 		{
-			this.options.syncModel.fetch();
+			// this.options.syncModel.fetch();
+			Sync();
 		},
 		delete: function(e)
 		{
