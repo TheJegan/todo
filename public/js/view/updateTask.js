@@ -33,6 +33,8 @@ var app = app || {};
 			task.set({
 				_list: listId
 			});
+
+			task.save();
 		},
 		deleteTask: function(e)
 		{
