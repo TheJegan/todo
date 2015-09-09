@@ -26,8 +26,8 @@ var app =  app || {};
 			var name = $('#modelName').val();
 			var listId = guid();
 			var model = new this.model({_id: listId, name: name});
-			// app.List.add(model);	
-			// model.save();		
+			app.List.add(model);	
+			model.save();		
 			
 			app.List.add({_id: listId, name: name});	
 			app.router.navigate('/');
