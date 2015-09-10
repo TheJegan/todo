@@ -6,7 +6,6 @@ var app = app || {};
 	var list = Backbone.Collection.extend({
 		model: app.ListModel,
 		localStorage: new Backbone.Todo.LocalStorage("List"),
-		// localStorage: new Backbone.LocalStorage("List"),
 		initialize: function()
 		{			
 		}
