@@ -1,28 +1,45 @@
 //Purpose to extend Backbone.localStorage.js
+function guid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
 
 Backbone.Todo = []
-Backbone.Todo.LocalStorage = function()
+Backbone.Todo.LocalStorage = function(name, serializer)
 {
-	this.create = function(model)
-	{
-		Backbone.LocalStorage.prototype.create.call(this, model);
-	}
-
-	this.update = function(model)
-	{
-		Backbone.LocalStorage.prototype.update.call(this, model);
-	}
-
+	var self = this;
+	self.name = name;
+	Backbone.LocalStorage.apply(this,arguments);
 	this.destroy = function(model)
 	{
-		console.log('destroy');
+		self.destroyTemp(model);
 		Backbone.LocalStorage.prototype.destroy.call(this, model);
+	}
+
+	this.destroyTemp = function(model)
+	{
+		//flag for deletion
+		// console.log('destroyTemp');
+		var m = model.toJSON();
+		m.isDelete = true;
+		var listName = 'Delete-' + self.name + '-'+ m._id;
+
+
+		if(localStorage.getItem(listName) === null)
+		{
+			localStorage.setItem(listName, JSON.stringify(m));
+		}
 	}
 }
 
-Backbone.Todo.LocalStorage.prototype = new Backbone.LocalStorage();
+Backbone.Todo.LocalStorage.prototype = Backbone.LocalStorage.prototype; //hack
 Backbone.Todo.LocalStorage.prototype.constructor = Backbone.Todo.LocalStorage;
-
+// var tmpDestroy
+// Backbone.LocalStorage.prototype.destroy
 
 function SyncList()
 {
