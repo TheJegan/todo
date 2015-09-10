@@ -3,13 +3,23 @@
 Backbone.Todo = []
 Backbone.Todo.LocalStorage = function()
 {
-	// var localDestory = this.destroy;
+	this.create = function(model)
+	{
+		Backbone.LocalStorage.prototype.create.call(this, model);
+	}
+
+	this.update = function(model)
+	{
+		Backbone.LocalStorage.prototype.update.call(this, model);
+	}
+
 	this.destroy = function(model)
 	{
 		console.log('destroy');
 		Backbone.LocalStorage.prototype.destroy.call(this, model);
 	}
 }
+
 Backbone.Todo.LocalStorage.prototype = new Backbone.LocalStorage();
 Backbone.Todo.LocalStorage.prototype.constructor = Backbone.Todo.LocalStorage;
 
