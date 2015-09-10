@@ -38,8 +38,6 @@ Backbone.Todo.LocalStorage = function(name, serializer)
 
 Backbone.Todo.LocalStorage.prototype = Backbone.LocalStorage.prototype; //hack
 Backbone.Todo.LocalStorage.prototype.constructor = Backbone.Todo.LocalStorage;
-// var tmpDestroy
-// Backbone.LocalStorage.prototype.destroy
 
 function SyncList()
 {
@@ -127,6 +125,31 @@ function Sync()
 {
 	// SyncList();
 	// SyncTask();
-	
+	var array = [];
+
+	for (var i = 0; i < localStorage.length; i++)
+	{
+	    array.push(localStorage.getItem(localStorage.key(i)));
+	}
+
+	$.ajax(
+	{
+		url: '/list/bulk/',
+		contentType: 'application/json',
+		data: JSON.stringify(array),
+		type: 'POST',
+		success: function(a, b,c)
+		{
+			console.log("success");
+			// GetTasks();
+		},
+		error: function(a,b,c)
+		{
+			console.log('error');
+		}
+	});
+
 }
+
+
 

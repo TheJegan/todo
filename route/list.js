@@ -71,6 +71,13 @@ router.put('/:listId', env.isAuthenticated, function(req, res, next)
 	});
 });
 
+router.post('/bulk', env.isAuthenticated, function(req, res, next)
+{
+	console.log(req.body);
+
+	res.send('coo');
+})
+
 router.delete('/:id', env.isAuthenticated, function(req, res, next)
 {
 	var listId = req.params.id;
