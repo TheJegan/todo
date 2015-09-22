@@ -1,3 +1,7 @@
+var app = app || {};
+
+
+
 //Purpose to extend Backbone.localStorage.js
 function guid() {
   function s4() {
@@ -121,6 +125,24 @@ function SyncTask(id)
 	});
 }
 
+function UpdateLocalStorage(data)
+{
+	
+
+	//update
+	//localStorage.setItem();
+	//add new models using backbone js
+	localStorage.clear();
+
+	for(var i = 0; data.length; i++)
+	{
+		var model = new app.ListModel({_id: data[i]._id, name: data[i].name, createdOn: data[i].createdOn});
+		app.List.add(model);
+		model.save();	
+	}
+
+}
+
 function Sync()
 {
 	// SyncList();
@@ -129,8 +151,19 @@ function Sync()
 
 	for (var i = 0; i < localStorage.length; i++)
 	{
-	    array.push(localStorage.getItem(localStorage.key(i)));
+		var record = localStorage.getItem(localStorage.key(i));
+		try
+		{
+			record = JSON.parse(record);
+		    array.push(record);
+		}catch(ex)
+		{
+			console.log("invalid json");
+			console.log(ex);
+		}
 	}
+
+	console.log(array);
 
 	$.ajax(
 	{
@@ -138,9 +171,11 @@ function Sync()
 		contentType: 'application/json',
 		data: JSON.stringify(array),
 		type: 'POST',
-		success: function(a, b,c)
+		success: function(data)
 		{
 			console.log("success");
+			
+			UpdateLocalStorage(data)
 			// GetTasks();
 		},
 		error: function(a,b,c)
@@ -148,8 +183,4 @@ function Sync()
 			console.log('error');
 		}
 	});
-
 }
-
-
-

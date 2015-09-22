@@ -6,6 +6,9 @@ var listSchema = require('../model/list');
 var taskSchema = require('../model/task');
 var List = mongoose.model('List', listSchema);
 var Task = mongoose.model('Task', taskSchema);
+var EventEmitter = require('events').EventEmitter;
+var ee = new EventEmitter();
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 router.get('/', env.isAuthenticated, function(req, res, next)
 {
@@ -29,27 +32,23 @@ router.post('/', env.isAuthenticated, function(req, res, next)
 
 	var collection = req.body;
 
-	for(var i = 0; i < collection.length; i++)
-	{
-		
-	}
-	// var list = new List({
-	// 	name: req.body.name,
-	// 	_user: req.user._id
-	// });
+	var list = new List({
+		name: req.body.name,
+		_user: req.user._id
+	});
 
-	// // res.send('complete');
-	// list.save(function(err)
-	// {
-	// 	if(err)
-	// 	{
-	// 		res.send(err);
-	// 	}
-	// 	else
-	// 	{
-	// 		res.send({"status" : "saved"});
-	// 	}
-	// });
+	// res.send('complete');
+	list.save(function(err)
+	{
+		if(err)
+		{
+			res.send(err);
+		}
+		else
+		{
+			res.send({"status" : "saved"});
+		}
+	});
 });
 
 router.put('/:listId', env.isAuthenticated, function(req, res, next)
@@ -71,12 +70,67 @@ router.put('/:listId', env.isAuthenticated, function(req, res, next)
 	});
 });
 
-router.post('/bulk', env.isAuthenticated, function(req, res, next)
-{
-	console.log(req.body);
+//will change later for better processing
+//http://docs.mongodb.org/master/MongoDB-crud-guide.pdf
+//upsert
 
-	res.send('coo');
-})
+function SyncLocalStorage(req, res, next)
+{
+	var rec = req.body;
+	var bulk = List.collection.initializeUnorderedBulkOp();
+
+	if(rec.length === 0)
+	{
+		next();
+	}
+	else
+	{
+
+		for(var i = 0; i < rec.length; i++)
+		{
+			if(rec[i].isDelete === true)
+			{
+				bulk.find({'_id': rec[i]._id}).remove({'_id': rec[i]._id});
+			}
+			else
+			{
+				if(rec[i]._id.length === 36) //place holder hack
+				{
+					bulk.insert({ name: rec[i].name, _user: req.user._id})
+				}
+				else
+				{
+					bulk.find( {'_id': rec[i]._id}).upsert().update(
+					   {
+					      $set: { name: rec[i].name, _user: req.user._id} 
+					   }
+					);
+				}		
+			}
+		}
+
+		bulk.execute(function(err,results) {
+	   		// result contains stats of the operations
+	   		console.log('write results: ');
+	   		console.log(results);
+	   		next();
+		});
+	}
+
+}
+router.post('/bulk', env.isAuthenticated, SyncLocalStorage, function(req, res, next)
+{
+	List.find({'_user': req.user._id}, function(err, l)
+	{
+		if(err)
+		{
+			res.send(err);
+		}else
+		{
+			res.send(l);
+		}
+	});
+});
 
 router.delete('/:id', env.isAuthenticated, function(req, res, next)
 {
