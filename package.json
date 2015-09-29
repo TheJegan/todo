@@ -23,6 +23,7 @@
     "passport": "^0.2.2",
     "passport-twitter": "^1.0.3",
     "superagent": "^1.4.0",
+    "superagent-oauth": "^0.2.3",
     "supertest": "^1.1.0"
   }
 }
