@@ -9,8 +9,9 @@ var Task = mongoose.model('Task', taskSchema);
 var EventEmitter = require('events').EventEmitter;
 var ee = new EventEmitter();
 var ObjectId = mongoose.Schema.Types.ObjectId;
+var ListController = require('../controller/list');
 
-router.get('/', env.isAuthenticated, function(req, res, next)
+router.get('/',function(req, res, next)
 {
 	List.find({'_user': req.user._id}, function(err, l)
 	{
@@ -21,7 +22,7 @@ router.get('/', env.isAuthenticated, function(req, res, next)
 		{
 			res.send(l);
 		}
-	})
+	});
 });
 
 router.post('/', env.isAuthenticated, function(req, res, next)
@@ -111,8 +112,6 @@ function SyncLocalStorage(req, res, next)
 
 		bulk.execute(function(err,results) {
 	   		// result contains stats of the operations
-	   		console.log('write results: ');
-	   		console.log(results);
 	   		next();
 		});
 	}
@@ -135,7 +134,7 @@ router.post('/bulk', env.isAuthenticated, SyncLocalStorage, function(req, res, n
 router.delete('/:id', env.isAuthenticated, function(req, res, next)
 {
 	var listId = req.params.id;
-	// ( respond when all list and associated tasks have been deleted )
+
 	List.find({'_id': listId}, function(err, t)
 	{
 		if(!err)
@@ -151,5 +150,6 @@ router.delete('/:id', env.isAuthenticated, function(req, res, next)
 	}).remove().exec();
 
 	res.send({'status': 'ok'});
-})
+});
+
 module.exports = router;
