@@ -14,7 +14,7 @@ var config = {
 		 	return next(); 
 		 }
 		console.log('is not isAuthenticated');
-		res.send({'statusCode': '-1'})
+		res.status(401).send({'statusCode': '-1'})
 	}
 }
 module.exports = config;
