@@ -5,9 +5,7 @@ var app = app || {};
 {
 	var list = Backbone.Collection.extend({
 		model: app.ListModel,
-		// url: '/list',
-		localStorage: new Backbone.Todo.LocalStorage("List"),
-		// url: "https://sweltering-inferno-8653.firebaseio.com/",
+		url: '/list',
 		initialize: function()
 		{			
 		}
