@@ -9,9 +9,9 @@ var Task = mongoose.model('Task', taskSchema);
 var EventEmitter = require('events').EventEmitter;
 var ee = new EventEmitter();
 var ObjectId = mongoose.Schema.Types.ObjectId;
-var ListController = require('../controller/list');
+var controller = require('../controller/list');
 
-router.get('/',function(req, res, next)
+router.get('/', env.isAuthenticated, function(req, res, next)
 {
 	List.find({'_user': req.user._id}, function(err, l)
 	{
@@ -29,7 +29,7 @@ router.post('/', env.isAuthenticated, function(req, res, next)
 {
 	console.log(req.body);
 	console.log("user " + req.user);
-	res.send(200, {status: '1'});
+	// res.send(200, {status: '1'});
 
 	var collection = req.body;
 

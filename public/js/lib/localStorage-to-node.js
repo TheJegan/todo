@@ -183,4 +183,25 @@ function Sync()
 			console.log('error');
 		}
 	});
+
+
+
+	$.ajax(
+	{
+		url: '/list/task/',
+		contentType: 'application/json',
+		data: JSON.stringify(array),
+		type: 'POST',
+		success: function(data)
+		{
+			console.log("success");
+			
+			UpdateLocalStorage(data)
+			// GetTasks();
+		},
+		error: function(a,b,c)
+		{
+			console.log('error');
+		}
+	});
 }

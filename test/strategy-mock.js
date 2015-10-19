@@ -7,6 +7,10 @@
 var passport = require('passport')
 	, util = require('util');
 
+var mongoose = require('mongoose');
+var env = require('../env/config');
+
+
 function StrategyMock(options, verify) {
 	this.name = 'mock';
 	this.passAuthentication = options.passAuthentication || true;
@@ -14,11 +18,14 @@ function StrategyMock(options, verify) {
 	this.verify = verify;
 }
 
+
 util.inherits(StrategyMock, passport.Strategy);
 
+
 StrategyMock.prototype.authenticate = function authenticate(req) {
+	console.log('authenticate');
 	if (this.passAuthentication) {
-		var user = { id: this.userId }
+		var user = { _id: this.userId }
 			, self = this;
 		
 		this.verify(user, function(err, resident) {
@@ -32,5 +39,8 @@ StrategyMock.prototype.authenticate = function authenticate(req) {
 		this.fail('Unauthorized');
 	}
 }
+
+
+
 
 module.exports = StrategyMock;

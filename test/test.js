@@ -1,115 +1,103 @@
 var should = require('chai').should(),
 	expect = require('chai').expect,
-	supertest = require('supertest'),
-	request = require('superagent');
-	api = supertest('http://localhost:3000'),
-	env = require('../env/config'),
-	app = require('../server')
-	passportMock = require('./passport-mock');
+	request = require('supertest'),
+	superagent = require('superagent'),
+	env = require('../env/config'),	
+	app = require('../server');
 
-// var assert = require("assert");
-require('superagent-oauth')(request);
+	// var server = request(app);
 
-describe('User', function(){
+// describe('User', function(){
+// 	it('unauthorized users should return a 401 response', function(done){
+// 		api.get('/user/me')
+// 		.set('Accept', 'application/json')
+// 		.expect(401)
+// 		.end(function(err, res){
+// 			// expect(res.body).to.have.property('statusCode');
+// 			// expect(res.body.statusCode).to.not.equal(null);
+// 			done();
+// 		});
+// 	});
+// });
 
+//created test user in db
+describe('authorized user', function(){
+	var user = { username : 'test', password : 'test'};
 
-	it('unauthorized users should return a 401 response', function(done){
-		api.get('/user/me')
-		.set('Accept', 'application/json')
-		.expect(401)
-		.end(function(err, res){
-			// expect(res.body).to.have.property('statusCode');
-			// expect(res.body.statusCode).to.not.equal(null);
-			done();
-		});
-	});
-
-
-	// it('authorized users should return a 200 response with profile data', function(done){
-	// 	api.get('/user/me')
-	// 	.sign(oauth, env.twitter.consumerKey, env.twitter.consumerSecret)
+	// before('testees', function(done){
+	// 	request(app).post('/user/login')
+	// 	.send(user)
 	// 	.set('Accept', 'application/json')
-	// 	.expect(401)
+	// 	.expect(200)
 	// 	.end(function(err, res){
-	// 		// expect(res.body).to.have.property('statusCode');
-	// 		// expect(res.body.statusCode).to.not.equal(null);
+	// 		console.log(res);
 	// 		done();
 	// 	});
 	// });
-});
 
 
-// describe('List', function(){
-// 	before(function(done){
-
-// 	});
-
-// 	it('test description', function(done)
-// 	{
-
-// 	})
-
-//   //   User.find({}).remove(function() {
-// 	 //      User.create({
-// 	 //        provider: 'local',
-// 	 //        name: 'Test User',
-// 	 //        email: 'test@test.com',
-// 	 //        password: 'test'
-// 	 //      }, {
-// 	 //        provider: 'local',
-// 	 //        role: 'admin',
-// 	 //        name: 'Admin',
-// 	 //        email: 'admin@admin.com',
-// 	 //        password: 'admin'
-// 	 //      }, function() {
-// 	 //          console.log('finished populating users');
-// 	 //          server.post('/auth/local')
-// 	 //            .send({email:'test@test.com', password:'test'})
-// 	 //            .expect(302)
-// 	 //            .end(function(err, res){
-// 	 //              console.error('ERROR ' + JSON.stringify(err));
-// 	 //              console.log('BODY ' + JSON.stringify(res.body));
-// 	 //              token = res.body.token;
-// 	 //              done();
-// 	 //            })
-// 	 //        }
-// 	 //      );
-// 	 //    });
-//  	// });
-
-
-// })
+	// before(function(done){
+	// 	console.log('gets to before')
+	// 	request(app).post('/user/login')
+	//       .set('Accept', 'application/json')
+	//       .expect(200)
+	//       .end(function(err, res)
+	//       {
+	//       		console.log(res.body);
+	//       		if(err) throw err;
+	//       		done();
+	//       })
+	// });
 
 
 
 
+	// var  list = { name: 'test list' };
 
-describe('GET /protected-resource authorized', function() {
-	var agent = request.agent();
-	
-	beforeEach(function(done) {
-		passportMock(app, {
-			passAuthentication: true,
-			userId: 1
-		});
+	// it('should post to list', function(done){
+	// 	api.post('/list')
+	// 	// .set('Accept', 'application/json')
+ //  //     	.expect('Content-Type', /json/)
+ //      	.send(list)
+	// 	.end(function(err, res){
+	// 		console.log(res);
+	// 		console.log("error: " + err);
+	// 		// expect(res.body).to.have.property('status');
+	// 		// expect(res.body.status).to.equal('saved');
+	// 		done();
+	// 	});
+	// });
 
-		supertest(app)
-			.get('/mock/login')
-			.end(function(err, result) {
-				if (!err) {
-					agent.saveCookies(result.res);
-					done();
-				} else {
-					done(err);
-				}
+
+	it('should get to list', function(done){
+		request(app).get('/list')
+			// .set('Connection', 'keep-alive')
+			.set('Accept', 'application/json')
+		    // .expect('Content-Type', /json/)
+		    .expect(200)
+			.end(function(err, res){	
+				console.log('gets here');
+				console.log(res);
+				// console.log("get error: " + err);
+				// expect(res.body).to.have.property('status');
+				// expect(res.body.status).to.equal('saved');
+				done();
 			});
 	});
 
-	it('should allow access to /protected-resource', function(done) {
-		var req = request(app).get('/list');
-		agent.attachCookies(req);
-		req.expect(200, done);
-	});
+	// after(function(done)
+	// {
+	// 	done();
+	// 	// api.post('/list')
+	// 	// .set('Accept', 'application/json')
+	// 	// .send(list)
+	// 	// .expect(200)
+	// 	// .end(function(err, res){
+	// 	// 	// expect(res.body).to.have.property('statusCode');
+	// 	// 	// expect(res.body.statusCode).to.not.equal(null);
+	// 	// 	done();
+	// 	// });
+	// });
 });
 
 

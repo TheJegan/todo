@@ -21,11 +21,14 @@
     "mocha": "^2.3.3",
     "mongoose": "^4.0.6",
     "passport": "^0.2.2",
+    "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.3",
     "sinon": "^1.17.1",
     "superagent": "^1.4.0",
     "superagent-oauth": "^0.2.3",
-    "supertest": "^1.1.0",
-    "zombie-passport-twitter": "0.0.3"
+    "supertest": "^1.1.0"
+  },
+  "devDependencies": {
+    "zombie": "^4.1.0"
   }
 }
