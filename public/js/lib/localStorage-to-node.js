@@ -140,13 +140,35 @@ function UpdateLocalStorage(data)
 		app.List.add(model);
 		model.save();	
 	}
+}
 
+
+function UpdateTaskLocalStore(TaskIds, data)
+{
+	var TaskIDCollection = TaskIds.split(',');
+
+	for(var i = 0; i < TaskIDCollection.length; i++)
+	{
+		var id = TaskIDCollection[i];
+		var tasks = app.Tasks.get( id );
+		tasks.destroy();
+	}
+}
+
+function UpdateListLocalStore(ListIds, data)
+{
+	var ListIdCollection = ListIds.split(',');
+
+	for(var i = 0; i < ListIdCollection.length; i++)
+	{
+		var id = ListIdCollection[i];
+		var list = app.List.get( id );
+		list.destroy();
+	}
 }
 
 function Sync()
 {
-	// SyncList();
-	// SyncTask();
 	var array = [];
 
 	for (var i = 0; i < localStorage.length; i++)
@@ -165,6 +187,14 @@ function Sync()
 
 	console.log(array);
 
+	//get all List ID's, add to collection
+	//collection of all list to be removed
+	var ListIDs = localStorage.getItem('List');
+	
+	//get all task ID's, add to collection
+	//collection of all tasks to be removed
+	var TaskIDs = localStorage.getItem('Task');
+	
 	$.ajax(
 	{
 		url: '/list/bulk/',
@@ -175,7 +205,8 @@ function Sync()
 		{
 			console.log("success");
 			
-			UpdateLocalStorage(data)
+			UpdateListLocalStore(ListIDs, data);
+			// UpdateLocalStorage(data)
 			// GetTasks();
 		},
 		error: function(a,b,c)
@@ -184,11 +215,9 @@ function Sync()
 		}
 	});
 
-
-
 	$.ajax(
 	{
-		url: '/list/task/',
+		url: '/task/bulk/',
 		contentType: 'application/json',
 		data: JSON.stringify(array),
 		type: 'POST',
@@ -196,7 +225,7 @@ function Sync()
 		{
 			console.log("success");
 			
-			UpdateLocalStorage(data)
+			UpdateTaskLocalStore(TaskIDs, data);
 			// GetTasks();
 		},
 		error: function(a,b,c)
