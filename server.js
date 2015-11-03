@@ -6,6 +6,7 @@ var task = require('./route/task');
 var auth = require('./route/auth');
 var system = require('./route/system');
 var user = require('./route/user');
+var batch = require('./route/batch');
 // var menu = require('./route/menu')
 var config = require('./env/config');
 var session = require('express-session');
@@ -24,14 +25,18 @@ app.use(session({ secret: 'TODO MAKE UP SOMETHING', resave: true, saveUninitiali
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.set('port', process.env.PORT || 3000);
+// app.set('port', process.env.PORT || 3000);
 app.use('/list', list);
 app.use('/task', task);
 app.use('/auth', auth);
 app.use('/system', system);
 app.use('/user', user);
+app.use('/batch', batch);
 
 app.listen(app.get('port'), function()
 {
 	console.log('listening...');
 });
+
+
+module.exports = app;

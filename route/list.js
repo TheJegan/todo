@@ -9,7 +9,7 @@ var Task = mongoose.model('Task', taskSchema);
 var EventEmitter = require('events').EventEmitter;
 var ee = new EventEmitter();
 var ObjectId = mongoose.Schema.Types.ObjectId;
-var controller = require('../controller/list');
+
 
 router.get('/', env.isAuthenticated, function(req, res, next)
 {
@@ -117,19 +117,6 @@ function SyncLocalStorage(req, res, next)
 	}
 
 }
-router.post('/bulk', env.isAuthenticated, SyncLocalStorage, function(req, res, next)
-{
-	List.find({'_user': req.user._id}, function(err, l)
-	{
-		if(err)
-		{
-			res.send(err);
-		}else
-		{
-			res.send(l);
-		}
-	});
-});
 
 router.delete('/:id', env.isAuthenticated, function(req, res, next)
 {

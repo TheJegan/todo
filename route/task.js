@@ -34,29 +34,72 @@ router.get('/:listId', env.isAuthenticated, function(req, res, next)
 	})
 });
 
-router.post('/:listId', env.isAuthenticated, function(req, res, next)
+// router.post('/:listId', env.isAuthenticated, function(req, res, next)
+// {
+// 	var listId = req.params.listId;
+
+// 	var task = new Task(
+// 	{
+// 		name: req.body.name,
+// 		_list: listId,
+// 		_user: req.user._id
+// 	});
+
+// 	task.save(function(err){
+// 		if(err)
+// 		{
+// 			res.send(err);
+// 		}
+// 		else
+// 		{
+// 			res.send({'status': 'saved'});
+// 			//res with stat
+// 		}
+// 	});	
+// });
+
+function SyncLocalStorage(req, res, next)
 {
-	var listId = req.params.listId;
+	var rec = req.body;
+	var bulk = Task.collection.initializeUnorderedBulkOp();
 
-	var task = new Task(
+	if(rec.length === 0)
 	{
-		name: req.body.name,
-		_list: listId,
-		_user: req.user._id
-	});
+		next();
+	}
+	else
+	{
 
-	task.save(function(err){
-		if(err)
+		for(var i = 0; i < rec.length; i++)
 		{
-			res.send(err);
+			if(rec[i].isDelete === true)
+			{
+				bulk.find({'_id': rec[i]._id}).remove({'_id': rec[i]._id});
+			}
+			else
+			{
+				if(rec[i]._id.length === 36) //place holder hack
+				{
+					bulk.insert({ name: rec[i].name, _user: req.user._id})
+				}
+				else
+				{
+					bulk.find( {'_id': rec[i]._id}).upsert().update(
+					   {
+					      $set: { name: rec[i].name, _user: req.user._id} 
+					   }
+					);
+				}		
+			}
 		}
-		else
-		{
-			res.send({'status': 'saved'});
-			//res with stat
-		}
-	});	
-});
+
+		bulk.execute(function(err,results) {
+	   		// result contains stats of the operations
+	   		next();
+		});
+	}
+
+}
 
 router.put('/:taskId', env.isAuthenticated, function(req, res, next)
 {

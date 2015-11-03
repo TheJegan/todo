@@ -127,8 +127,6 @@ function SyncTask(id)
 
 function UpdateLocalStorage(data)
 {
-	
-
 	//update
 	//localStorage.setItem();
 	//add new models using backbone js
@@ -143,41 +141,78 @@ function UpdateLocalStorage(data)
 }
 
 
-function UpdateTaskLocalStore(TaskIds, data)
+function UpdateTaskLocalStore(TaskIDCollection, data)
 {
-	var TaskIDCollection = TaskIds.split(',');
-
 	for(var i = 0; i < TaskIDCollection.length; i++)
 	{
 		var id = TaskIDCollection[i];
 		var tasks = app.Tasks.get( id );
 		tasks.destroy();
 	}
+
+	for(var i = 0; i < data.length; i++)
+	{
+		var model = new app.TaskModel({_id: data[i]._id, name: data[i].name, createdOn: data[i].createdOn});
+		app.Tasks.add(model);
+		model.save();	
+	}
 }
 
-function UpdateListLocalStore(ListIds, data)
+function UpdateListLocalStore(ListIdCollection, data)
 {
-	var ListIdCollection = ListIds.split(',');
-
 	for(var i = 0; i < ListIdCollection.length; i++)
 	{
 		var id = ListIdCollection[i];
 		var list = app.List.get( id );
 		list.destroy();
 	}
+
+	for(var i = 0; i < data.length; i++)
+	{
+		var model = new app.ListModel({_id: data[i]._id, name: data[i].name, createdOn: data[i].createdOn});
+		app.List.add(model);
+		model.save();	
+	}
 }
 
 function Sync()
 {
-	var array = [];
+	var arrayOfLists = [];
+	var arrayOfTasks = [];
 
-	for (var i = 0; i < localStorage.length; i++)
+
+	//get all List ID's, add to collection
+	//collection of all list to be removed
+	var ListIDs = localStorage.getItem('List');
+	ListIDs = ListIDs.split(',');
+
+
+	for (var i = 0; i < ListIDs.length; i++)
 	{
-		var record = localStorage.getItem(localStorage.key(i));
+		var record = localStorage.getItem('List-' + ListIDs[i]);
 		try
 		{
 			record = JSON.parse(record);
-		    array.push(record);
+		    arrayOfLists.push(record);
+		}catch(ex)
+		{
+			console.log("invalid json");
+			console.log(ex);
+		}
+	}
+	
+	//get all task ID's, add to collection
+	//collection of all tasks to be removed
+	var TaskIDs = localStorage.getItem('Task');
+	TaskIDs = TaskIDs.split(',')
+
+	for (var i = 0; i < TaskIDs.length; i++)
+	{
+		var record = localStorage.getItem('Task-' + TaskIDs[i]);
+		try
+		{
+			record = JSON.parse(record);
+		    arrayOfTasks.push(record);
 		}catch(ex)
 		{
 			console.log("invalid json");
@@ -185,29 +220,17 @@ function Sync()
 		}
 	}
 
-	console.log(array);
-
-	//get all List ID's, add to collection
-	//collection of all list to be removed
-	var ListIDs = localStorage.getItem('List');
-	
-	//get all task ID's, add to collection
-	//collection of all tasks to be removed
-	var TaskIDs = localStorage.getItem('Task');
-	
 	$.ajax(
 	{
-		url: '/list/bulk/',
+		url: '/batch',
 		contentType: 'application/json',
-		data: JSON.stringify(array),
+		data: JSON.stringify({list: arrayOfLists, tasks: arrayOfTasks}),
 		type: 'POST',
 		success: function(data)
 		{
 			console.log("success");
 			
 			UpdateListLocalStore(ListIDs, data);
-			// UpdateLocalStorage(data)
-			// GetTasks();
 		},
 		error: function(a,b,c)
 		{
@@ -219,14 +242,13 @@ function Sync()
 	{
 		url: '/task/bulk/',
 		contentType: 'application/json',
-		data: JSON.stringify(array),
+		data: JSON.stringify(arrayOfTasks),
 		type: 'POST',
 		success: function(data)
 		{
 			console.log("success");
 			
 			UpdateTaskLocalStore(TaskIDs, data);
-			// GetTasks();
 		},
 		error: function(a,b,c)
 		{
