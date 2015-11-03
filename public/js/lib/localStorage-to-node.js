@@ -180,7 +180,28 @@ function Sync()
 	var arrayOfLists = [];
 	var arrayOfTasks = [];
 
+	if(localStorage.length === 0)
+	{
+		$.ajax(
+		{
+			url: '/batch',
+			contentType: 'application/json',		
+			type: 'GET',
+			success: function(data)
+			{
+				console.log("success");
+				
+				UpdateListLocalStore([], data.lists);
+				UpdateTaskLocalStore([], data.tasks);
+			},
+			error: function(a,b,c)
+			{
+				console.log('error');
+			}
+		});
 
+		return
+	}
 	//get all List ID's, add to collection
 	//collection of all list to be removed
 	var ListIDs = localStorage.getItem('List');
