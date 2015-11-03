@@ -152,7 +152,7 @@ function UpdateTaskLocalStore(TaskIDCollection, data)
 
 	for(var i = 0; i < data.length; i++)
 	{
-		var model = new app.TaskModel({_id: data[i]._id, name: data[i].name, createdOn: data[i].createdOn});
+		var model = new app.TaskModel({_id: data[i]._id, name: data[i].name, createdOn: data[i].createdOn, _list: data[i]._list});
 		app.Tasks.add(model);
 		model.save();	
 	}
@@ -224,13 +224,14 @@ function Sync()
 	{
 		url: '/batch',
 		contentType: 'application/json',
-		data: JSON.stringify({list: arrayOfLists, tasks: arrayOfTasks}),
+		data: JSON.stringify({lists: arrayOfLists, tasks: arrayOfTasks}),
 		type: 'POST',
 		success: function(data)
 		{
 			console.log("success");
 			
-			UpdateListLocalStore(ListIDs, data);
+			UpdateListLocalStore(ListIDs, data.lists);
+			UpdateTaskLocalStore(TaskIDs, data.tasks);
 		},
 		error: function(a,b,c)
 		{
@@ -238,21 +239,5 @@ function Sync()
 		}
 	});
 
-	$.ajax(
-	{
-		url: '/task/bulk/',
-		contentType: 'application/json',
-		data: JSON.stringify(arrayOfTasks),
-		type: 'POST',
-		success: function(data)
-		{
-			console.log("success");
-			
-			UpdateTaskLocalStore(TaskIDs, data);
-		},
-		error: function(a,b,c)
-		{
-			console.log('error');
-		}
-	});
+	
 }

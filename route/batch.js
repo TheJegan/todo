@@ -56,9 +56,7 @@ function SyncLocalStorageList(req, res, next)
 					);
 				}		
 			}
-		}
-
-		
+		}		
 
 		results = bulk.execute(function(err, results)
 		{
@@ -136,17 +134,29 @@ function GetNewID(ListID, Records)
 }
 router.post('/', SyncLocalStorageList, SyncLocalStorageTask, function(req, res, next)
 {
-	// List.find({'_user': req.user._id}, function(err, l)
-	// {
-	// 	if(err)
-	// 	{
-	// 		res.send(err);
-	// 	}else
-	// 	{
-	// 		res.send(l);
-	// 	}
-	// });
-	res.send('done');
+	
+	List.find({'_user': req.user._id}, function(err, l)
+	{
+		if(err)
+		{
+			res.send(err);
+		}else
+		{
+
+			// res.send(l);
+			//will replace with promises or events emitter. calm down guys!
+			Task.find({'_user': req.user._id}, function(err, t){
+				if(err)
+				{
+					res.send(err);
+				}
+				else
+				{
+					res.json({lists: l, tasks: t});
+				}
+			});
+		}
+	});
 });
 
 module.exports = router;
