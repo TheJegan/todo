@@ -31,7 +31,7 @@ passport.use(new LocalStrategy(
 
 router.get('/me', env.isAuthenticated, function(req,res, next)
 {
-	res.json({
+	res.send({
 		'_id': req.user._id,
 		"username": req.user.username
 	})
