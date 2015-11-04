@@ -25,7 +25,7 @@ app.use(session({ secret: 'TODO MAKE UP SOMETHING', resave: true, saveUninitiali
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3000);
 app.use('/list', list);
 app.use('/task', task);
 app.use('/auth', auth);
