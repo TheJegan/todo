@@ -23,12 +23,12 @@ var app =  app || {};
 			e.stopPropagation();
 
 			var self = this;
-			var name = $('#modelName').val();		
-			var model = new this.model({ name: name});
-			// app.List.add(model);	
-			model.save();		
-			
-			app.List.add({_id: listId, name: name});	
+			var name = $('#modelName').val();
+			var listId = guid();
+			var model = new this.model({_id: listId, name: name});
+			app.List.add(model);
+			model.save();	
+	
 			app.router.navigate('/');
 			
 			if(app.FrmMain){app.FrmMain.close();}

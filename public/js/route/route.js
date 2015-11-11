@@ -14,7 +14,7 @@ var app = app || {};
 	});
 	
 	// Initiate the router
-	app.router = new AppRouter;
+	app.router = new AppRouter();
 
 	app.router.on('route:renderList', function(id) 
 	{	

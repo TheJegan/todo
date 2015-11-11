@@ -1,8 +1,8 @@
 var twitterStrategy = {
 	consumerKey: "15k4F26hVvP0F6vjvDCVkw",
 	consumerSecret: "MGdqxBUI0lLoLc7KZYnW0xRNPAfpUL9diWFLU559lA",
-	callback: 'https://infinite-fjord-1986.herokuapp.com/auth/twitter/callback'
 	// callback: 'http://localhost:3000/auth/twitter/callback'
+	callback: 'https://jegan-todo.herokuapp.com/auth/twitter/callback'
 }
   
 
@@ -16,7 +16,7 @@ var config = {
 		 	return next(); 
 		 }
 		console.log('is not isAuthenticated');
-		res.send({'statusCode': '-1'})
+		res.status(401).send({'statusCode': '-1'})
 	}
 }
 module.exports = config;

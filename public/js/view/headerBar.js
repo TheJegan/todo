@@ -8,7 +8,8 @@ var app = app || {};
 		events: {
 			'click #sync': 'sync',
 			'click .deleteList': 'delete',
-			'click .navbar-brand': 'home'
+			'click .navbar-brand': 'home',
+			'click #clearStorage': 'clearStorage'
 		},
 		initialize: function(option)
 		{
@@ -23,8 +24,8 @@ var app = app || {};
 		sync: function()
 		{
 			// this.options.syncModel.fetch();
-			// Sync();
-			app.List.fetch();
+			Sync();
+			// app.List.fetch();
 		},
 		delete: function(e)
 		{
@@ -64,6 +65,10 @@ var app = app || {};
 			if(app.FrmMain){app.FrmMain.close();}
 			app.FrmMain = new app.MainView({model: app.List});
 		},
+		clearStorage: function()
+		{
+			localStorage.clear();
+		}, 
 		close: function()
 		{
 			this.$el.off();

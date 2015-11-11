@@ -65,12 +65,12 @@ passport.use(new TwitterStrategy({
 //end implement passport
 
 
+
 router.get('/twitter', passport.authenticate('twitter'));
 
 router.get('/twitter/callback', 
   passport.authenticate('twitter', { successRedirect: '/index.html',
                                      failureRedirect: '/fail' }));
-
 
 
 module.exports = router;

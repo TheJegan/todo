@@ -1,0 +1,4 @@
+node_modules/.bin/mocha
+node_modules/mocha/node_modules/.bin/jade
+node_modules/mocha/node_modules/.bin/mkdirp
+node_modules/mocha/node_modules/.bin/supports-color

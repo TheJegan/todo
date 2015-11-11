@@ -6,6 +6,10 @@ var listSchema = require('../model/list');
 var taskSchema = require('../model/task');
 var List = mongoose.model('List', listSchema);
 var Task = mongoose.model('Task', taskSchema);
+var EventEmitter = require('events').EventEmitter;
+var ee = new EventEmitter();
+var ObjectId = mongoose.Schema.Types.ObjectId;
+
 
 router.get('/', env.isAuthenticated, function(req, res, next)
 {
@@ -18,13 +22,17 @@ router.get('/', env.isAuthenticated, function(req, res, next)
 		{
 			res.send(l);
 		}
-	})
+	});
 });
 
 router.post('/', env.isAuthenticated, function(req, res, next)
 {
 	console.log(req.body);
 	console.log("user " + req.user);
+	// res.send(200, {status: '1'});
+
+	var collection = req.body;
+
 	var list = new List({
 		name: req.body.name,
 		_user: req.user._id
@@ -63,10 +71,57 @@ router.put('/:listId', env.isAuthenticated, function(req, res, next)
 	});
 });
 
+//will change later for better processing
+//http://docs.mongodb.org/master/MongoDB-crud-guide.pdf
+//upsert
+
+function SyncLocalStorage(req, res, next)
+{
+	var rec = req.body;
+	var bulk = List.collection.initializeUnorderedBulkOp();
+
+	if(rec.length === 0)
+	{
+		next();
+	}
+	else
+	{
+
+		for(var i = 0; i < rec.length; i++)
+		{
+			if(rec[i].isDelete === true)
+			{
+				bulk.find({'_id': rec[i]._id}).remove({'_id': rec[i]._id});
+			}
+			else
+			{
+				if(rec[i]._id.length === 36) //place holder hack
+				{
+					bulk.insert({ name: rec[i].name, _user: req.user._id})
+				}
+				else
+				{
+					bulk.find( {'_id': rec[i]._id}).upsert().update(
+					   {
+					      $set: { name: rec[i].name, _user: req.user._id} 
+					   }
+					);
+				}		
+			}
+		}
+
+		bulk.execute(function(err,results) {
+	   		// result contains stats of the operations
+	   		next();
+		});
+	}
+
+}
+
 router.delete('/:id', env.isAuthenticated, function(req, res, next)
 {
 	var listId = req.params.id;
-	// ( respond when all list and associated tasks have been deleted )
+
 	List.find({'_id': listId}, function(err, t)
 	{
 		if(!err)
@@ -82,5 +137,6 @@ router.delete('/:id', env.isAuthenticated, function(req, res, next)
 	}).remove().exec();
 
 	res.send({'status': 'ok'});
-})
+});
+
 module.exports = router;
